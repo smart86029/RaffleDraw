@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using RaffleDraw.Data;
+using RaffleDraw.App.Presenters;
 
-namespace RaffleDraw.App
+namespace RaffleDraw.App.Views
 {
     public partial class MainForm : MetroForm
     {
@@ -19,6 +21,10 @@ namespace RaffleDraw.App
         {
             InitializeComponent();
             prizePage = new PrizePage(prizeTabPage);
+
+            // TODO: IOC
+            var repository = new PrizeRepository();
+            var presenter = new PrizePresenter(prizePage, repository);
         }
     }
 }

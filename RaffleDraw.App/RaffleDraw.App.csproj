@@ -54,24 +54,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PrizePage.cs">
+    <Compile Include="Presenters\PrizePresenter.cs" />
+    <Compile Include="Views\PrizePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PrizePage.Designer.cs">
+    <Compile Include="Views\PrizePage.Designer.cs">
       <DependentUpon>PrizePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PrizePage.resx">
+    <Compile Include="Interfaces\IPrizeView.cs" />
+    <EmbeddedResource Include="Views\PrizePage.resx">
       <DependentUpon>PrizePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -102,6 +104,10 @@
       <Project>{f252d6fd-2e79-485a-b4ef-8b17357c1feb}</Project>
       <Name>RaffleDraw.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RaffleDraw.Data\RaffleDraw.Data.csproj">
+      <Project>{ba05845b-6573-48cc-ac3e-9361bba70cc0}</Project>
+      <Name>RaffleDraw.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RaffleDraw.Models\RaffleDraw.Models.csproj">
       <Project>{EF104A93-75C4-40DF-A697-ADF0AE4CD5F2}</Project>
       <Name>RaffleDraw.Models</Name>
@@ -110,5 +116,6 @@
   <ItemGroup>
     <Content Include="Images\logo.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace RaffleDraw.App
+﻿namespace RaffleDraw.App.Views
 {
     partial class MainForm
     {

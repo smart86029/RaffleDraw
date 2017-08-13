@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 using MetroFramework.Controls;
+using RaffleDraw.App.Presenters;
 using RaffleDraw.Common;
 using RaffleDraw.Models;
 
-namespace RaffleDraw.App
+namespace RaffleDraw.App.Views
 {
-    public partial class PrizePage : MetroUserControl
+    public partial class PrizePage : MetroUserControl, IPrizeView
     {
         MetroTabPage owner;
-        private List<Prize> prizes = new List<Prize>();
 
         public PrizePage()
         {
@@ -27,6 +27,22 @@ namespace RaffleDraw.App
             BringToFront();
         }
 
+        public ICollection<Prize> Prizes
+        {
+            get
+            {
+                return prizesComboBox.DataSource as List<Prize>;
+            }
+            set
+            {
+                prizesComboBox.DataSource = value;
+                prizesComboBox.DisplayMember = "Content";
+                prizesComboBox.ValueMember = "SerialNumber";
+            }
+        }
+
+        public PrizePresenter PrizePresenter { get; set; }
+
         private void importPrizeLink_Click(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
@@ -34,33 +50,12 @@ namespace RaffleDraw.App
             openFileDialog.Filter = "Excel 檔案 (*xls; *.xlsx; *.xlsm)|*xls; *.xlsx; *.xlsm|所有檔案 (*.*)|*.*";
 
             var result = openFileDialog.ShowDialog();
-
             if (result == DialogResult.OK)
             {
-                LoadExcel(openFileDialog.FileName);
+                PrizePresenter.LoadExcel(openFileDialog.FileName);
                 importPrizeLink.Text = "完成";
                 importPrizeLink.Enabled = false;
             }
         }
-
-        private void LoadExcel(string fileName)
-        {
-           var dataTable= ExcelUtility.Read(fileName, 0, 1, 0, 4);
-            foreach (DataRow row in dataTable.Rows)
-            {
-                prizes.Add(new Prize
-                {
-                    SerialNumber = Convert.ToString(row[0]),
-                    Quentity = Convert.ToInt32(row[1]),
-                    Content = Convert.ToString(row[2]),
-                    Provider = Convert.ToString(row[3])
-                });
-            }
-
-            prizesComboBox.DataSource = prizes;
-            prizesComboBox.DisplayMember = "Content";
-            prizesComboBox.ValueMember = "SerialNumber";
-        }
-
     }
 }

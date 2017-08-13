@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaffleDraw.Models", "Raffle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaffleDraw.Common", "RaffleDraw.Common\RaffleDraw.Common.csproj", "{F252D6FD-2E79-485A-B4EF-8B17357C1FEB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaffleDraw.Data", "RaffleDraw.Data\RaffleDraw.Data.csproj", "{BA05845B-6573-48CC-AC3E-9361BBA70CC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F252D6FD-2E79-485A-B4EF-8B17357C1FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F252D6FD-2E79-485A-B4EF-8B17357C1FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F252D6FD-2E79-485A-B4EF-8B17357C1FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA05845B-6573-48CC-AC3E-9361BBA70CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA05845B-6573-48CC-AC3E-9361BBA70CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA05845B-6573-48CC-AC3E-9361BBA70CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA05845B-6573-48CC-AC3E-9361BBA70CC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
