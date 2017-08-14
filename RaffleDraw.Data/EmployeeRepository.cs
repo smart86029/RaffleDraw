@@ -11,25 +11,25 @@ using RaffleDraw.Models;
 namespace RaffleDraw.Data
 {
     /// <summary>
-    /// 獎項倉儲。
+    /// 員工倉儲。
     /// </summary>
-    public class PrizeRepository : IPrizeRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
-        private List<Prize> prizes;
+        private List<Employee> employees;
 
-        public PrizeRepository()
+        public EmployeeRepository()
         {
-            prizes = new List<Prize>();
+            employees = new List<Employee>();
         }
 
         /// <summary>
         /// 傳回倉儲中符合指定之條件的實體。
         /// </summary>
         /// <param name="predicate">用來測試每個實體是否符合條件的函式。</param>
-        /// <returns><see cref="IEnumerable{Prize}"/>，其中包含倉儲中通過函式指定之測試的實體。</returns>
-        public IEnumerable<Prize> Many(Expression<Func<Prize, bool>> predicate)
+        /// <returns><see cref="IEnumerable{Employee}"/>，其中包含倉儲中通過函式指定之測試的實體。</returns>
+        public IEnumerable<Employee> Many(Expression<Func<Employee, bool>> predicate)
         {
-            var query = prizes.AsQueryable();
+            var query = employees.AsQueryable();
 
             if (predicate != null)
                 query = query.Where(predicate);
@@ -43,16 +43,17 @@ namespace RaffleDraw.Data
         /// <param name="fileName">文件名稱。</param>
         public void LoadExcel(string fileName)
         {
-            var dataTable = ExcelUtility.Read(fileName, 0, 1, 0, 4);
+            var dataTable = ExcelUtility.Read(fileName, 0, 2, 0, 5);
 
             foreach (DataRow row in dataTable.Rows)
             {
-                prizes.Add(new Prize
+                employees.Add(new Employee
                 {
                     SerialNumber = Convert.ToString(row[0]),
-                    Quentity = Convert.ToInt32(row[1]),
-                    Content = Convert.ToString(row[2]),
-                    Provider = Convert.ToString(row[3])
+                    Office = Convert.ToString(row[1]),
+                    Division = Convert.ToString(row[2]),
+                    EmployeeId = Convert.ToString(row[3]),
+                    Name = Convert.ToString(row[4])
                 });
             }
         }

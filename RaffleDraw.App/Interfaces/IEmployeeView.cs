@@ -5,18 +5,18 @@ using RaffleDraw.Models;
 namespace RaffleDraw.App.Views
 {
     /// <summary>
-    /// 獎項視圖。
+    /// 員工視圖。
     /// </summary>
-    public interface IPrizeView
+    public interface IEmployeeView
     {
         /// <summary>
-        /// 獎項。
+        /// 員工。
         /// </summary>
-        ICollection<Prize> Prizes { get; set; }
+        ICollection<Employee> Employees { get; set; }
 
         /// <summary>
-        /// 獎項主持人。
+        /// 員工主持人。
         /// </summary>
-        PrizePresenter PrizePresenter { get; set; }
+        EmployeePresenter EmployeePresenter { get; set; }
     }
 }

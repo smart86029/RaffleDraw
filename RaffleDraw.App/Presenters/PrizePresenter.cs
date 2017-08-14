@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RaffleDraw.Data;
+﻿using System.Linq;
 using RaffleDraw.App.Views;
-using RaffleDraw.Common;
-using RaffleDraw.Models;
-using System.Data;
+using RaffleDraw.Data;
 
 namespace RaffleDraw.App.Presenters
 {
@@ -31,25 +24,22 @@ namespace RaffleDraw.App.Presenters
             this.prizeRepository = prizeRepository;
         }
 
-        public void UpdatePrizeView()
-        {
-        }
-
+        /// <summary>
+        /// 載入 Excel。
+        /// </summary>
+        /// <param name="fileName">文件名稱。</param>
         public void LoadExcel(string fileName)
         {
-            var prizes = new List<Prize>();
-            var dataTable = ExcelUtility.Read(fileName, 0, 1, 0, 4);
+            prizeRepository.LoadExcel(fileName);
+            UpdatePrizeView();
+        }
 
-            foreach (DataRow row in dataTable.Rows)
-            {
-                prizes.Add(new Prize
-                {
-                    SerialNumber = Convert.ToString(row[0]),
-                    Quentity = Convert.ToInt32(row[1]),
-                    Content = Convert.ToString(row[2]),
-                    Provider = Convert.ToString(row[3])
-                });
-            }
+        /// <summary>
+        /// 更新視圖。
+        /// </summary>
+        private void UpdatePrizeView()
+        {
+            var prizes = prizeRepository.Many(null).ToList();
 
             prizeView.Prizes = prizes;
         }

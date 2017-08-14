@@ -16,15 +16,19 @@ namespace RaffleDraw.App.Views
     public partial class MainForm : MetroForm
     {
         private PrizePage prizePage;
+        private EmployeePage employeePage;
 
         public MainForm()
         {
             InitializeComponent();
             prizePage = new PrizePage(prizeTabPage);
+            employeePage = new EmployeePage(employeeTabPage);
 
             // TODO: IOC
-            var repository = new PrizeRepository();
-            var presenter = new PrizePresenter(prizePage, repository);
+            var prizeRepository = new PrizeRepository();
+            var prizePresenter = new PrizePresenter(prizePage, prizeRepository);
+            var employeeRepository = new EmployeeRepository();
+            var employeePresenter = new EmployeePresenter(employeePage, employeeRepository);
         }
     }
 }

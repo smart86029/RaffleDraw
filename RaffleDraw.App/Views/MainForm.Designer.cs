@@ -31,15 +31,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.pageTabControl = new MetroFramework.Controls.MetroTabControl();
             this.prizeTabPage = new MetroFramework.Controls.MetroTabPage();
+            this.employeeTabPage = new MetroFramework.Controls.MetroTabPage();
             this.pageTabControl.SuspendLayout();
             this.SuspendLayout();
             // 
             // pageTabControl
             // 
             this.pageTabControl.Controls.Add(this.prizeTabPage);
+            this.pageTabControl.Controls.Add(this.employeeTabPage);
             this.pageTabControl.Location = new System.Drawing.Point(38, 103);
             this.pageTabControl.Name = "pageTabControl";
-            this.pageTabControl.SelectedIndex = 0;
+            this.pageTabControl.SelectedIndex = 1;
             this.pageTabControl.Size = new System.Drawing.Size(1148, 509);
             this.pageTabControl.TabIndex = 0;
             this.pageTabControl.UseSelectable = true;
@@ -57,6 +59,20 @@
             this.prizeTabPage.VerticalScrollbarBarColor = true;
             this.prizeTabPage.VerticalScrollbarHighlightOnWheel = false;
             this.prizeTabPage.VerticalScrollbarSize = 10;
+            // 
+            // employeeTabPage
+            // 
+            this.employeeTabPage.HorizontalScrollbarBarColor = true;
+            this.employeeTabPage.HorizontalScrollbarHighlightOnWheel = false;
+            this.employeeTabPage.HorizontalScrollbarSize = 10;
+            this.employeeTabPage.Location = new System.Drawing.Point(4, 38);
+            this.employeeTabPage.Name = "employeeTabPage";
+            this.employeeTabPage.Size = new System.Drawing.Size(1140, 467);
+            this.employeeTabPage.TabIndex = 1;
+            this.employeeTabPage.Text = "員工";
+            this.employeeTabPage.VerticalScrollbarBarColor = true;
+            this.employeeTabPage.VerticalScrollbarHighlightOnWheel = false;
+            this.employeeTabPage.VerticalScrollbarSize = 10;
             // 
             // MainForm
             // 
@@ -76,6 +92,7 @@
 
         private MetroFramework.Controls.MetroTabControl pageTabControl;
         private MetroFramework.Controls.MetroTabPage prizeTabPage;
+        private MetroFramework.Controls.MetroTabPage employeeTabPage;
     }
 }
 

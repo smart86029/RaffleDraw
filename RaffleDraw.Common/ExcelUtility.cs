@@ -5,6 +5,9 @@ using NPOI.XSSF.UserModel;
 
 namespace RaffleDraw.Common
 {
+    /// <summary>
+    /// Excel 工具。
+    /// </summary>
     public class ExcelUtility
     {
         /// <summary>
