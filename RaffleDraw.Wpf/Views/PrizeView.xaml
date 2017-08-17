@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="RaffleDraw.Wpf.Views.PrizeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RaffleDraw.Wpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Source={StaticResource Locator}, Path=PrizeViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" MinWidth="200">
+            <TextBlock Text="獎品" />
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Content="獎品內容" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" />
+            <Label Content="數量" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" />
+            <Label Content="提供者" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+            <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="5" Text="{Binding GiftContent, ValidatesOnDataErrors=True}" />
+            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="5" Text="{Binding GiftQuentity}" />
+            <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Margin="5" Text="{Binding GiftProvider, ValidatesOnDataErrors=True}" />
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                <Button Content="新增" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Margin="5" Command="{Binding AddGiftCommand}" />
+                <Button Content="清除" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75" Margin="5" Command="{Binding CleanGiftCommand}" />
+            </StackPanel>
+        </Grid>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right">
+            <Button Content="載入獎品清單" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Command="{Binding ImportPrizeCommand}" />
+            <Label Content="{Binding ImportPrizeMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </StackPanel>
+        <ListView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding GiftListDataView}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="true">
+                    <GridViewColumn DisplayMemberBinding="{Binding SerialNumber}" Width="100">
+                        <GridViewColumnHeader Content="獎項" Command="{Binding SortGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Tag="SerialNumber" />
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Content}" Width="300">
+                        <GridViewColumnHeader Content="獎品內容" Command="{Binding SortGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Tag="Content" />
+                    </GridViewColumn>
+                    <GridViewColumn Width="100">
+                        <GridViewColumnHeader Content="數量" Command="{Binding SortGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Tag="Quentity" />
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Right" Text="{Binding Quentity}" Margin="0,0,20,0" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="100">
+                        <GridViewColumnHeader Content="已抽" Command="{Binding SortGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Tag="Drawn" />
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock HorizontalAlignment="Right" Text="{Binding Drawn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0,0,20,0" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Provider}" Width="300">
+                        <GridViewColumnHeader Content="提供者" Command="{Binding SortGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource Self}}" Tag="Provider" />
+                    </GridViewColumn>
+                    <GridViewColumn Header="">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="編輯" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding EditGiftCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" />
+                                    <Button Content="刪除" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding RemoveGiftCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>
