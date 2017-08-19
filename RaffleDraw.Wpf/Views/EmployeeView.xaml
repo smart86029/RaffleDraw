@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="RaffleDraw.Wpf.Views.PrizeView"
+﻿<UserControl x:Class="RaffleDraw.Wpf.Views.EmployeeView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,7 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             DataContext="{Binding Source={StaticResource Locator}, Path=PrizeViewModel}">
+             DataContext="{Binding Source={StaticResource Locator}, Path=EmployeeViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" MinWidth="200">
-            <TextBlock Text="獎品" />
+            <TextBlock Text="員工" />
         </StackPanel>
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -44,16 +44,16 @@
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Right">
-            <Button Content="載入獎品清單" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Command="{Binding ImportPrizeCommand}" />
-            <Label Content="{Binding ImportPrizeMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Button Content="載入員工清單" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Command="{Binding ImportEmployeeCommand}" />
+            <Label Content="{Binding ImportEmployeeMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </StackPanel>
-        <DataGrid ItemsSource="{Binding Prizes}" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Employees}" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="序號" Binding="{Binding SerialNumber}" />
-                <DataGridTextColumn Header="獎品內容" Binding="{Binding Content}" />
-                <DataGridTextColumn Header="數量" Binding="{Binding Quentity}" />
-                <DataGridTextColumn Header="已抽" Binding="{Binding SerialNumber}" />
-                <DataGridTextColumn Header="提供者" Binding="{Binding Provider}" />
+                <DataGridTextColumn Header="一級單位" Binding="{Binding Office}" />
+                <DataGridTextColumn Header="二級單位" Binding="{Binding Division}" />
+                <DataGridTextColumn Header="員工代號" Binding="{Binding EmployeeID}" />
+                <DataGridTextColumn Header="姓名" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="" />
             </DataGrid.Columns>
         </DataGrid>

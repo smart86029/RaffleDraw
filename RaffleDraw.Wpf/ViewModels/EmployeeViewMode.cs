@@ -13,42 +13,42 @@ using RaffleDraw.Models;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
-    public class PrizeViewModel : ViewModelBase
+    public class EmployeeViewModel : ViewModelBase
     {
-        private PrizeRepository prizeRepository = new PrizeRepository();
-        //private ObservableCollection<Prize> prizes;
-        private string importPrizeMessage;
+        private EmployeeRepository employeeRepository = new EmployeeRepository();
+        //private ObservableCollection<Employee> employees;
+        private string importEmployeeMessage;
 
-        public PrizeViewModel()
+        public EmployeeViewModel()
         {
-            ImportPrizeCommand = new RelayCommand(() => ImportPrize());
+            ImportEmployeeCommand = new RelayCommand(() => ImportEmployee());
         }
 
-        public string ImportPrizeMessage
+        public string ImportEmployeeMessage
         {
-            get => importPrizeMessage;
-            set => Set(ref importPrizeMessage, value);
+            get => importEmployeeMessage;
+            set => Set(ref importEmployeeMessage, value);
         }
 
         /// <summary>
         /// 回傳獎品清單
         /// </summary>
-        public ObservableCollection<Prize> Prizes
+        public ObservableCollection<Employee> Employees
         {
-            get => prizeRepository.Prizes;
+            get => employeeRepository.Employees;
         }
 
         /// <summary>
         /// 回傳瀏覽獎品命令
         /// </summary>
-        public ICommand ImportPrizeCommand { get; private set; }
+        public ICommand ImportEmployeeCommand { get; private set; }
 
 
 
         /// <summary>
         /// 載入獎品清單
         /// </summary>
-        private void ImportPrize()
+        private void ImportEmployee()
         {
             var openFileDialog = new OpenFileDialog();
             openFileDialog.DefaultExt = ".xlsx";
@@ -57,9 +57,9 @@ namespace RaffleDraw.Wpf.ViewModels
             var result = openFileDialog.ShowDialog();
             if (result.GetValueOrDefault())
             {
-                prizeRepository.LoadExcel(openFileDialog.FileName);
-                //Prizes = prizeRepository.Prizes;
-                ImportPrizeMessage = "完成";
+                employeeRepository.LoadExcel(openFileDialog.FileName);
+                //Employees = employeeRepository.Employees;
+                ImportEmployeeMessage = "完成";
             }
         }
     }

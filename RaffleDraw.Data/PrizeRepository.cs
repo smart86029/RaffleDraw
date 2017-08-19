@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
@@ -15,11 +16,16 @@ namespace RaffleDraw.Data
     /// </summary>
     public class PrizeRepository : IPrizeRepository
     {
-        private List<Prize> prizes;
+        private ObservableCollection<Prize> prizes;
 
         public PrizeRepository()
         {
-            prizes = new List<Prize>();
+            prizes = new ObservableCollection<Prize>();
+        }
+
+        public ObservableCollection<Prize>  Prizes
+        {
+            get => prizes;
         }
 
         /// <summary>

@@ -1,40 +1,62 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GalaSoft.MvvmLight;
 
 namespace RaffleDraw.Models
 {
     /// <summary>
     /// 員工類別。
     /// </summary>
-    public class Employee
+    public class Employee : ObservableObject
     {
+        private string serialNumber;
+        private string employeeId;
+        private string name;
+        private string office;
+        private string division;
+
         /// <summary>
         /// 取得或設定序號。
         /// </summary>
-        public string SerialNumber { get; set; }
+        public string SerialNumber
+        {
+            get => serialNumber;
+            set => Set(ref serialNumber, value);
+        }
 
         /// <summary>
         /// 取得或設定員工編號。
         /// </summary>
-        public string EmployeeId { get; set; }
+        public string EmployeeId
+        {
+            get => employeeId;
+            set => Set(ref employeeId, value);
+        }
 
         /// <summary>
         /// 取得或設定姓名。
         /// </summary>
-        public string Name { get; set; }
+        public string Name
+        {
+            get => name;
+            set => Set(ref name, value);
+        }
 
         /// <summary>
         /// 取得或設定一級單位。
         /// </summary>
-        public string Office { get; set; }
+        public string Office
+        {
+            get => office;
+            set => Set(ref office, value);
+        }
 
         /// <summary>
         /// 取得或設定二級單位。
         /// </summary>
-        public string Division { get; set; }
+        public string Division
+        {
+            get => division;
+            set => Set(ref division, value);
+        }
 
         /// <summary>
         /// 取得或設定中的獎項。

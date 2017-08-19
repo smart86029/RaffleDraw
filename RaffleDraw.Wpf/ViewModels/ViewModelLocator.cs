@@ -44,23 +44,14 @@ namespace RaffleDraw.Wpf.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<PrizeViewModel>();
+            SimpleIoc.Default.Register<EmployeeViewModel>();
         }
 
-        public MainViewModel MainViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainViewModel>();
-            }
-        }
+        public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
 
-        public PrizeViewModel PrizeViewModel
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<PrizeViewModel>();
-            }
-        }
+        public PrizeViewModel PrizeViewModel => ServiceLocator.Current.GetInstance<PrizeViewModel>();
+
+        public EmployeeViewModel EmployeeViewModel => ServiceLocator.Current.GetInstance<EmployeeViewModel>();
 
         public static void Cleanup()
         {
