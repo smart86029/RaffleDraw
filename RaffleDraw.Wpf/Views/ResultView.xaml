@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="RaffleDraw.Wpf.Views.ResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RaffleDraw.Wpf.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Source={StaticResource Locator}, Path=ResultViewModel}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" MinWidth="200">
+            <TextBlock Text="抽獎" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Label Content="獎項" Width="100" VerticalAlignment="Center" />
+            <ComboBox MinWidth="300" Margin="5" ItemsSource="{Binding Prizes}" SelectedItem="{Binding Prize}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding SerialNumber}" Width="Auto" />
+                            <TextBlock Text=" | " Margin="10,0" />
+                            <TextBlock Text="{Binding Content}" Width="Auto" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label Content="序號" Width="100" VerticalAlignment="Center" />
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" AcceptsReturn="False" TextWrapping="Wrap" Width="50" Margin="5" Text="{Binding SearchSerialNumber, TargetNullValue=''}">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchEmployeeCommand}" CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Content="搜尋" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SearchEmployeeCommand, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" >
+            <Label FontSize="24" Content="獎項" VerticalAlignment="Center" Margin="0,0,20,0" />
+            <Label FontSize="32" Width="150" Content="{Binding Prize.SerialNumber}" />
+            <Label FontSize="24" Content="數量" VerticalAlignment="Center" Margin="0,0,20,0" />
+            <Label FontSize="32" Width="50" Content="{Binding Prize.Quentity}" />
+            <Label FontSize="24" Content="已抽" VerticalAlignment="Center" Margin="0,0,20,0" />
+            <Label FontSize="32" Width="50" Content="{Binding GiftDrawn}" />
+            <Label FontSize="24" Content="提供者" VerticalAlignment="Center" Margin="0,0,20,0" />
+            <Label FontSize="32" Content="{Binding Prize.Provider}" />
+        </StackPanel>
+        <Label Grid.Row="3" FontSize="64" FontWeight="Bold" Content="{Binding GiftContent}" />
+        <StackPanel Grid.Row="4" Orientation="Horizontal">
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeSerialNumber}" Margin="0,0,20,0" />
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeOffice}" Margin="0,0,20,0" />
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeDivision}" Margin="0,0,20,0" />
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeName}" Margin="0,0,20,0" />
+            <Button Content="儲存" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SaveWinnerCommand}" Margin="0,0,20,0" />
+            <Label Content="{Binding SaveWinnerMessage}" VerticalAlignment="Center" />
+        </StackPanel>
+        <ListView Grid.Row="5" ItemsSource="{Binding EmployeeList}">
+            <ListView.View>
+                <GridView AllowsColumnReorder="true">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=SerialNumber}" Header="序號" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Office}" Header="一級單位" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Division}" Header="二級單位" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=EmployeeID}" Header="員工代號" Width="100" />
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Name}" Header="姓名" Width="200" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

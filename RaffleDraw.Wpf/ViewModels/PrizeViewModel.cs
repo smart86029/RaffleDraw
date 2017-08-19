@@ -15,7 +15,7 @@ namespace RaffleDraw.Wpf.ViewModels
 {
     public class PrizeViewModel : ViewModelBase
     {
-        private PrizeRepository prizeRepository = new PrizeRepository();
+        private PrizeRepository prizeRepository = PrizeRepository.Instance;
         //private ObservableCollection<Prize> prizes;
         private string importPrizeMessage;
 

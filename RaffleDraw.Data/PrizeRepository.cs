@@ -16,11 +16,23 @@ namespace RaffleDraw.Data
     /// </summary>
     public class PrizeRepository : IPrizeRepository
     {
+        private static PrizeRepository prizeRepository;
         private ObservableCollection<Prize> prizes;
 
-        public PrizeRepository()
+        private PrizeRepository()
         {
             prizes = new ObservableCollection<Prize>();
+        }
+
+        public static PrizeRepository Instance
+        {
+            get
+            {
+                if (prizeRepository == null)
+                    prizeRepository = new PrizeRepository();
+
+                return prizeRepository;
+            }
         }
 
         public ObservableCollection<Prize>  Prizes
