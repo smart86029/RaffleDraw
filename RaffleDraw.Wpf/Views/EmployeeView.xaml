@@ -47,7 +47,7 @@
             <Button Content="載入員工清單" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Command="{Binding ImportEmployeeCommand}" />
             <Label Content="{Binding ImportEmployeeMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </StackPanel>
-        <DataGrid ItemsSource="{Binding Employees}" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Employees}" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="序號" Binding="{Binding SerialNumber}" />
                 <DataGridTextColumn Header="一級單位" Binding="{Binding Office}" />

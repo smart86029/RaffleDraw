@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:local="clr-namespace:RaffleDraw.Wpf.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
@@ -25,7 +26,7 @@
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding SerialNumber}" Width="Auto" />
+                            <TextBlock Text="{Binding SerialNumber, StringFormat=\{0\,10\}}" Width="Auto" FontFamily="Consolas" />
                             <TextBlock Text=" | " Margin="10,0" />
                             <TextBlock Text="{Binding Content}" Width="Auto" />
                         </StackPanel>
@@ -33,12 +34,12 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Label Content="序號" Width="100" VerticalAlignment="Center" />
-            <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" AcceptsReturn="False" TextWrapping="Wrap" Width="50" Margin="5" Text="{Binding SearchSerialNumber, TargetNullValue=''}">
+            <TextBox HorizontalAlignment="Left" VerticalAlignment="Top" AcceptsReturn="False" Width="100" Margin="5" Text="{Binding SearchSerialNumber, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SearchEmployeeCommand}" CommandParameter="{Binding Path=Text, RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
+                    <KeyBinding Key="Enter" Command="{Binding SearchEmployeeCommand}" />
                 </TextBox.InputBindings>
             </TextBox>
-            <Button Content="搜尋" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SearchEmployeeCommand, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="搜尋" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SearchEmployeeCommand}" />
         </StackPanel>
         <StackPanel Grid.Row="2" Orientation="Horizontal" >
             <Label FontSize="24" Content="獎項" VerticalAlignment="Center" Margin="0,0,20,0" />
@@ -52,10 +53,10 @@
         </StackPanel>
         <Label Grid.Row="3" FontSize="64" FontWeight="Bold" Content="{Binding GiftContent}" />
         <StackPanel Grid.Row="4" Orientation="Horizontal">
-            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeSerialNumber}" Margin="0,0,20,0" />
-            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeOffice}" Margin="0,0,20,0" />
-            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeDivision}" Margin="0,0,20,0" />
-            <Label FontSize="48" FontWeight="Bold" Content="{Binding EmployeeName}" Margin="0,0,20,0" />
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding Employee.SerialNumber}" Margin="0,0,20,0" />
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding Employee.Office}" Margin="0,0,20,0" />
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding Employee.Division}" Margin="0,0,20,0" />
+            <Label FontSize="48" FontWeight="Bold" Content="{Binding Employee.Name}" Margin="0,0,20,0" />
             <Button Content="儲存" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SaveWinnerCommand}" Margin="0,0,20,0" />
             <Label Content="{Binding SaveWinnerMessage}" VerticalAlignment="Center" />
         </StackPanel>

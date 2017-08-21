@@ -47,7 +47,7 @@
             <Button Content="載入獎品清單" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Command="{Binding ImportPrizeCommand}" />
             <Label Content="{Binding ImportPrizeMessage}" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </StackPanel>
-        <DataGrid ItemsSource="{Binding Prizes}" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Prizes}" Grid.Row="2" Grid.ColumnSpan="2" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="序號" Binding="{Binding SerialNumber}" />
                 <DataGridTextColumn Header="獎品內容" Binding="{Binding Content}" />

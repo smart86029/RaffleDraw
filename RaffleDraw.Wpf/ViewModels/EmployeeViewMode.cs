@@ -15,7 +15,7 @@ namespace RaffleDraw.Wpf.ViewModels
 {
     public class EmployeeViewModel : ViewModelBase
     {
-        private EmployeeRepository employeeRepository = new EmployeeRepository();
+        private EmployeeRepository employeeRepository = EmployeeRepository.Instance;
         //private ObservableCollection<Employee> employees;
         private string importEmployeeMessage;
 

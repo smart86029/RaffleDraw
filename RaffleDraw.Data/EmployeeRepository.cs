@@ -16,11 +16,23 @@ namespace RaffleDraw.Data
     /// </summary>
     public class EmployeeRepository : IEmployeeRepository
     {
+        private static EmployeeRepository employeeRepository;
         private ObservableCollection<Employee> employees;
 
-        public EmployeeRepository()
+        private EmployeeRepository()
         {
             employees = new ObservableCollection<Employee>();
+        }
+
+        public static EmployeeRepository Instance
+        {
+            get
+            {
+                if (employeeRepository == null)
+                    employeeRepository = new EmployeeRepository();
+
+                return employeeRepository;
+            }
         }
 
         public ObservableCollection<Employee> Employees

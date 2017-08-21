@@ -10,14 +10,14 @@
                       Title="中華電信國際分公司感恩餐會抽獎查詢程式" Height="720" Width="1280">
     <Grid>
         <controls:MetroTabControl>
-            <TabItem Header="結果">
-                <views:ResultView></views:ResultView>
+            <TabItem Header="員工">
+                <views:EmployeeView></views:EmployeeView>
             </TabItem>
             <TabItem Header="獎品">
                 <views:PrizeView></views:PrizeView>
             </TabItem>
-            <TabItem Header="員工">
-                <views:EmployeeView></views:EmployeeView>
+            <TabItem Header="結果">
+                <views:ResultView></views:ResultView>
             </TabItem>
         </controls:MetroTabControl>
     </Grid>
