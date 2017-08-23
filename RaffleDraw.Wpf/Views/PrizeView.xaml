@@ -52,7 +52,7 @@
                 <DataGridTextColumn Header="序號" Binding="{Binding SerialNumber}" />
                 <DataGridTextColumn Header="獎品內容" Binding="{Binding Content}" />
                 <DataGridTextColumn Header="數量" Binding="{Binding Quentity}" />
-                <DataGridTextColumn Header="已抽" Binding="{Binding SerialNumber}" />
+                <DataGridTextColumn Header="已抽" Binding="{Binding Winners.Count}" />
                 <DataGridTextColumn Header="提供者" Binding="{Binding Provider}" />
                 <DataGridTextColumn Header="" />
             </DataGrid.Columns>

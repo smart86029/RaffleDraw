@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
@@ -33,10 +34,7 @@ namespace RaffleDraw.Wpf.ViewModels
         /// <summary>
         /// 回傳獎品清單
         /// </summary>
-        public ObservableCollection<Prize> Prizes
-        {
-            get => prizeRepository.Prizes;
-        }
+        public ObservableCollection<Prize> Prizes => prizeRepository.Prizes;
 
         /// <summary>
         /// 回傳瀏覽獎品命令
@@ -58,7 +56,11 @@ namespace RaffleDraw.Wpf.ViewModels
             if (result.GetValueOrDefault())
             {
                 prizeRepository.LoadExcel(openFileDialog.FileName);
-                //Prizes = prizeRepository.Prizes;
+
+                var resultViewModel = ServiceLocator.Current.GetInstance<ResultViewModel>();
+                foreach (var prize in prizeRepository.Prizes)
+                    resultViewModel.Prizes.Add(prize);
+
                 ImportPrizeMessage = "完成";
             }
         }

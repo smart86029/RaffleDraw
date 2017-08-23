@@ -47,11 +47,11 @@
             <Label FontSize="24" Content="數量" VerticalAlignment="Center" Margin="0,0,20,0" />
             <Label FontSize="32" Width="50" Content="{Binding Prize.Quentity}" />
             <Label FontSize="24" Content="已抽" VerticalAlignment="Center" Margin="0,0,20,0" />
-            <Label FontSize="32" Width="50" Content="{Binding GiftDrawn}" />
+            <Label FontSize="32" Width="50" Content="{Binding Prize.Winners.Count}" />
             <Label FontSize="24" Content="提供者" VerticalAlignment="Center" Margin="0,0,20,0" />
             <Label FontSize="32" Content="{Binding Prize.Provider}" />
         </StackPanel>
-        <Label Grid.Row="3" FontSize="64" FontWeight="Bold" Content="{Binding GiftContent}" />
+        <Label Grid.Row="3" FontSize="64" FontWeight="Bold" Content="{Binding Prize.Content}" />
         <StackPanel Grid.Row="4" Orientation="Horizontal">
             <Label FontSize="48" FontWeight="Bold" Content="{Binding Employee.SerialNumber}" Margin="0,0,20,0" />
             <Label FontSize="48" FontWeight="Bold" Content="{Binding Employee.Office}" Margin="0,0,20,0" />
@@ -60,7 +60,7 @@
             <Button Content="儲存" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SaveWinnerCommand}" Margin="0,0,20,0" />
             <Label Content="{Binding SaveWinnerMessage}" VerticalAlignment="Center" />
         </StackPanel>
-        <ListView Grid.Row="5" ItemsSource="{Binding EmployeeList}">
+        <ListView Grid.Row="5" ItemsSource="{Binding Prize.Winners}">
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
                     <GridViewColumn DisplayMemberBinding="{Binding Path=SerialNumber}" Header="序號" Width="100" />

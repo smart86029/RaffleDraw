@@ -18,14 +18,16 @@ namespace RaffleDraw.Wpf.ViewModels
         private PrizeRepository prizeRepository = PrizeRepository.Instance;
         private Employee employee;
         private Prize prize;
+        private ObservableCollection<Prize> prizes = new ObservableCollection<Prize>();
         private string searchSerialNumber = string.Empty;
+        private string saveWinnerMessage = string.Empty;
 
-        public ResultViewModel()
-        {
-            SearchEmployeeCommand = new RelayCommand(() => SearchEmployee());
-        }
+        public ICommand SearchEmployeeCommand => new RelayCommand(() => SearchEmployee());
 
-        public ICommand SearchEmployeeCommand { get; private set; }
+        /// <summary>
+        /// 回傳儲存命令
+        /// </summary>
+        public ICommand SaveWinnerCommand => new RelayCommand(() => SaveWinner());
 
         /// <summary>
         /// 回傳/設定員工
@@ -45,10 +47,7 @@ namespace RaffleDraw.Wpf.ViewModels
         /// <summary>
         /// 回傳獎品清單
         /// </summary>
-        public ObservableCollection<Prize> Prizes
-        {
-            get =>prizeRepository.Prizes;
-        }
+        public ObservableCollection<Prize> Prizes => prizes;
 
         /// <summary>
         /// 回傳/設定搜尋序號
@@ -57,6 +56,15 @@ namespace RaffleDraw.Wpf.ViewModels
         {
             get => searchSerialNumber;
             set => Set(ref searchSerialNumber, value);
+        }
+
+        /// <summary>
+        /// 回傳/設定儲存訊息
+        /// </summary>
+        public string SaveWinnerMessage
+        {
+            get => saveWinnerMessage;
+            set => Set(ref saveWinnerMessage, value);
         }
 
         /// <summary>
@@ -70,6 +78,30 @@ namespace RaffleDraw.Wpf.ViewModels
                 Employee = employee;
                 //SaveWinnerMessage = "";
             }
+        }
+
+        /// <summary>
+        /// 儲存中獎
+        /// </summary>
+        private void SaveWinner()
+        {
+            if (employee == null)
+                SaveWinnerMessage = "請選擇員工";
+            if (employee.Prize == null)
+                SaveWinnerMessage = "重複中獎";
+
+            if (prize == null)
+                SaveWinnerMessage = "請選擇獎項";
+            if (prize.Quentity <= prize.Winners.Count)
+                SaveWinnerMessage = "此獎已滿額";
+
+            Prize.Winners.Add(Employee);
+            Employee.Prize = Prize;
+            Employee = null;
+            SearchSerialNumber = string.Empty;
+            SaveWinnerMessage = string.Empty;
+            if (prize.Quentity <= prize.Winners.Count)
+                Prizes.Remove(prize);
         }
     }
 }

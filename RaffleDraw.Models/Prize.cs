@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 
 namespace RaffleDraw.Models
@@ -52,6 +53,6 @@ namespace RaffleDraw.Models
         /// <summary>
         /// 取得或設定中獎者。
         /// </summary>
-        public virtual List<Employee> Winners { get; set; }
+        public virtual ObservableCollection<Employee> Winners { get; set; } = new ObservableCollection<Employee>();
     }
 }
