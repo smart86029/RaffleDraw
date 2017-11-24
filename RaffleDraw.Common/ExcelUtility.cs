@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using System.Linq;
 using NPOI.XSSF.UserModel;
 
 namespace RaffleDraw.Common
@@ -37,18 +38,15 @@ namespace RaffleDraw.Common
             for (var i = headerRowIndex + 1; i <= sheet.LastRowNum; i++)
             {
                 var row = sheet.GetRow(i) as XSSFRow;
-                var hasValue = false;
                 var dataRow = dataTable.NewRow();
 
                 for (int j = columnsIndex; j < columnsCount; j++)
                 {
                     var value = Convert.ToString(row.GetCell(j));
                     dataRow[j] = value;
-                    if (!string.IsNullOrWhiteSpace(value))
-                        hasValue = true;
                 }
 
-                if (hasValue)
+                if (dataRow.ItemArray.Any(x => !string.IsNullOrWhiteSpace(x as string)))
                     dataTable.Rows.Add(dataRow);
             }
 
@@ -57,6 +55,37 @@ namespace RaffleDraw.Common
             sheet = null;
 
             return dataTable;
+        }
+
+        /// <summary>
+        /// 寫入 Excel。
+        /// </summary>
+        /// <param name="fileName">檔案名稱。</param>
+        /// <param name="dataTable">資料表。</param>
+        public static void Write(string fileName, DataTable dataTable)
+        {
+            var workbook = new XSSFWorkbook();
+            var sheet = workbook.CreateSheet();
+            var headerRow = sheet.CreateRow(0);
+
+            foreach (DataColumn column in dataTable.Columns)
+                headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
+
+            var rowIndex = 1;
+            foreach (DataRow row in dataTable.Rows)
+            {
+                var dataRow = sheet.CreateRow(rowIndex) as XSSFRow;
+
+                foreach (DataColumn column in dataTable.Columns)
+                    dataRow.CreateCell(column.Ordinal).SetCellValue(row[column].ToString());
+
+                rowIndex++;
+            }
+
+            using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
+            {
+                workbook.Write(fileStream);
+            }
         }
     }
 }

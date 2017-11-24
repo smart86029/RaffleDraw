@@ -19,6 +19,7 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0" MinWidth="200">
             <TextBlock Text="抽獎" />
+            <Button Content="匯出" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Command="{Binding ExportWinnerCommand}" />
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label Content="獎項" Width="100" VerticalAlignment="Center" />

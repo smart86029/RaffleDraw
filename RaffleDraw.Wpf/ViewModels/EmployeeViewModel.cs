@@ -50,10 +50,11 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         private void ImportEmployee()
         {
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.DefaultExt = ".xlsx";
-            openFileDialog.Filter = "Excel 檔案 (*xls; *.xlsx; *.xlsm)|*xls; *.xlsx; *.xlsm|所有檔案 (*.*)|*.*";
-
+            var openFileDialog = new OpenFileDialog
+            {
+                DefaultExt = ".xlsx",
+                Filter = "Excel 檔案 (*xls; *.xlsx; *.xlsm)|*xls; *.xlsx; *.xlsm|所有檔案 (*.*)|*.*"
+            };
             var result = openFileDialog.ShowDialog();
             if (result.GetValueOrDefault())
             {

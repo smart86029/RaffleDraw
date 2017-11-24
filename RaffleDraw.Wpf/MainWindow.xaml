@@ -7,7 +7,8 @@
                       xmlns:local="clr-namespace:RaffleDraw.Wpf"
                       xmlns:views="clr-namespace:RaffleDraw.Wpf.Views"
                       mc:Ignorable="d"
-                      Title="中華電信國際分公司感恩餐會抽獎查詢程式" Height="720" Width="1280">
+                      Title="中華電信國際分公司感恩餐會抽獎查詢程式" Height="720" Width="1280"
+                      Icon="Images/logo.ico">
     <Grid>
         <controls:MetroTabControl>
             <TabItem Header="員工">
