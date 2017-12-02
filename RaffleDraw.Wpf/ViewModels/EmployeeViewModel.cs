@@ -17,8 +17,6 @@ namespace RaffleDraw.Wpf.ViewModels
     /// </summary>
     public class EmployeeViewModel : ViewModelBase
     {
-        //private CreateEmployeeView dialog = new CreateEmployeeView();
-        //private IDialogCoordinator dialogCoordinator = DialogCoordinator.Instance;
         private EmployeeRepository employeeRepository = EmployeeRepository.Instance;
         private string importEmployeeMessage;
         
@@ -26,8 +24,6 @@ namespace RaffleDraw.Wpf.ViewModels
         {
 
             ShowCreateEmployeeDialogCommand = new RelayCommand(() => ShowCreateEmployeeDialog());
-            //HideCreateEmployeeDialogCommand = new RelayCommand(async () => await dialogCoordinator.HideMetroDialogAsync(this, dialog));
-            //CreateEmployeeCommand = new RelayCommand(() => ImportEmployee());
             ImportEmployeeCommand = new RelayCommand(() => ImportEmployee());
         }
 
@@ -37,10 +33,6 @@ namespace RaffleDraw.Wpf.ViewModels
             set => Set(ref importEmployeeMessage, value);
         }
 
-        /// <summary>
-        /// 取得員工清單。
-        /// </summary>
-        public ObservableCollection<Employee> Employees => employeeRepository.Employees;
 
         /// <summary>
         /// 取得或設定顯示新增員工方塊命令。
@@ -48,19 +40,16 @@ namespace RaffleDraw.Wpf.ViewModels
         public ICommand ShowCreateEmployeeDialogCommand { get; private set; }
 
         /// <summary>
-        /// 取得或設定隱藏新增員工方塊命令。
-        /// </summary>
-        public ICommand HideCreateEmployeeDialogCommand { get; private set; }
-
-        /// <summary>
-        /// 取得或設定新增員工命令。
-        /// </summary>
-        public ICommand CreateEmployeeCommand { get; private set; }
-
-        /// <summary>
         /// 取得或設定匯入員工命令。
         /// </summary>
         public ICommand ImportEmployeeCommand { get; private set; }
+
+
+        /// <summary>
+        /// 取得員工清單。
+        /// </summary>
+        public ObservableCollection<Employee> Employees => employeeRepository.Employees;
+
 
         private void ShowCreateEmployeeDialog()
         {

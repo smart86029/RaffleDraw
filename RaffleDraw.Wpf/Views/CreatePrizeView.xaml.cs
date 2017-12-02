@@ -18,14 +18,13 @@ using MahApps.Metro.Controls.Dialogs;
 namespace RaffleDraw.Wpf.Views
 {
     /// <summary>
-    /// PrizeView.xaml 的互動邏輯
+    /// CreatePrizeView.xaml 的互動邏輯
     /// </summary>
-    public partial class PrizeView : UserControl
+    public partial class CreatePrizeView : CustomDialog
     {
-        private CreatePrizeView dialog = new CreatePrizeView();
         private IDialogCoordinator dialogCoordinator = DialogCoordinator.Instance;
 
-        public PrizeView()
+        public CreatePrizeView()
         {
             InitializeComponent();
             Messenger.Default.Register<NotificationMessage>(this, NotificationMessageReceivedAsync);
@@ -33,8 +32,8 @@ namespace RaffleDraw.Wpf.Views
 
         private async void NotificationMessageReceivedAsync(NotificationMessage message)
         {
-            if (message.Notification == "ShowCreatePrizeDialog")
-                await dialogCoordinator.ShowMetroDialogAsync(DataContext, dialog);
+            if (message.Notification == "HideCreatePrizeDialog")
+                await dialogCoordinator.HideMetroDialogAsync(DataContext, this);
         }
     }
 }

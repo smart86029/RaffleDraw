@@ -5,8 +5,8 @@
                       xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
                       xmlns:local="clr-namespace:RaffleDraw.Wpf.Views"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      d:DesignHeight="800"
-                      d:DesignWidth="600"
+                      d:DesignHeight="300"
+                      d:DesignWidth="800"
                       dialogs:DialogParticipation.Register="{Binding}"
                       DataContext="{Binding Source={StaticResource Locator}, Path=CreateEmployeeViewModel}"
                       mc:Ignorable="d">
@@ -20,19 +20,19 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="序號" />
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding GiftProvider, ValidatesOnDataErrors=True}" />
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="5" Text="{Binding Employee.SerialNumber, ValidatesOnDataErrors=True}" />
         <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="一級單位" />
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding GiftProvider, ValidatesOnDataErrors=True}" />
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Employee.Office, ValidatesOnDataErrors=True}" />
         <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="二級單位" />
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding GiftProvider, ValidatesOnDataErrors=True}" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Employee.Division, ValidatesOnDataErrors=True}" />
         <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="員工代號" />
-        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding GiftProvider, ValidatesOnDataErrors=True}" />
+        <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding Employee.EmployeeId, ValidatesOnDataErrors=True}" />
         <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="姓名" />
-        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding GiftProvider, ValidatesOnDataErrors=True}" />
+        <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding Employee.Name, ValidatesOnDataErrors=True, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
             <Button Margin="5" HorizontalAlignment="Left" Command="{Binding CreateEmployeeCommand}" Content="新增" />
             <Button Margin="5" HorizontalAlignment="Right" Command="{Binding HideCreateEmployeeDialogCommand}" Content="取消" />

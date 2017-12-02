@@ -4,7 +4,7 @@
       <vm:ViewModelLocator xmlns:vm="clr-namespace:RaffleDraw.Wpf"
                            x:Key="Locator" />
   </Application.Resources>
-  
+
   In the View:
   DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
 
@@ -12,9 +12,7 @@
   See http://www.galasoft.ch/mvvm
 */
 
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 
 namespace RaffleDraw.Wpf.ViewModels
@@ -44,20 +42,18 @@ namespace RaffleDraw.Wpf.ViewModels
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
-            SimpleIoc.Default.Register<PrizeViewModel>();
-            SimpleIoc.Default.Register<CreateEmployeeViewModel>();
             SimpleIoc.Default.Register<EmployeeViewModel>();
+            SimpleIoc.Default.Register<CreateEmployeeViewModel>();
+            SimpleIoc.Default.Register<PrizeViewModel>();
+            SimpleIoc.Default.Register<CreatePrizeViewModel>();
             SimpleIoc.Default.Register<ResultViewModel>();
         }
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
-
-        public PrizeViewModel PrizeViewModel => ServiceLocator.Current.GetInstance<PrizeViewModel>();
-
-        public CreateEmployeeViewModel CreateEmployeeViewModel => ServiceLocator.Current.GetInstance<CreateEmployeeViewModel>();
-
         public EmployeeViewModel EmployeeViewModel => ServiceLocator.Current.GetInstance<EmployeeViewModel>();
-
+        public CreateEmployeeViewModel CreateEmployeeViewModel => ServiceLocator.Current.GetInstance<CreateEmployeeViewModel>();
+        public PrizeViewModel PrizeViewModel => ServiceLocator.Current.GetInstance<PrizeViewModel>();
+        public CreatePrizeViewModel CreatePrizeViewModel => ServiceLocator.Current.GetInstance<CreatePrizeViewModel>();
         public ResultViewModel ResultViewModel => ServiceLocator.Current.GetInstance<ResultViewModel>();
 
         public static void Cleanup()

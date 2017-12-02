@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using System.ComponentModel.DataAnnotations;
 
 namespace RaffleDraw.Models
 {
@@ -28,16 +29,27 @@ namespace RaffleDraw.Models
         public string EmployeeId
         {
             get => employeeId;
-            set => Set(ref employeeId, value);
+            set
+            {
+                
+                Set(ref employeeId, value);
+            }
+                
         }
 
         /// <summary>
         /// 取得或設定姓名。
         /// </summary>
+        [Required]
+        [MaxLength(3)]
         public string Name
         {
             get => name;
-            set => Set(ref name, value);
+            set
+            {
+                Validator.ValidateProperty(value, new ValidationContext(this, null, null) { MemberName = nameof(EmployeeId) });
+                Set(ref name, value);
+            }
         }
 
         /// <summary>

@@ -33,9 +33,7 @@ namespace RaffleDraw.Wpf.Views
         private async void NotificationMessageReceivedAsync(NotificationMessage message)
         {
             if (message.Notification == "HideCreateEmployeeDialog")
-            {
                 await dialogCoordinator.HideMetroDialogAsync(DataContext, this);
-            }
         }
     }
 }

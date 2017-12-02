@@ -11,11 +11,6 @@
              dialogs:DialogParticipation.Register="{Binding}"
              DataContext="{Binding Source={StaticResource Locator}, Path=EmployeeViewModel}"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <local:CreateEmployeeView x:Key="CustomDialogTest" />
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
