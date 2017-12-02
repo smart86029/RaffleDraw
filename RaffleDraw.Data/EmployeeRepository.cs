@@ -4,8 +4,6 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using RaffleDraw.Common;
 using RaffleDraw.Models;
 
@@ -14,9 +12,9 @@ namespace RaffleDraw.Data
     /// <summary>
     /// 員工倉儲。
     /// </summary>
-    public class EmployeeRepository : IEmployeeRepository
+    public sealed class EmployeeRepository : IEmployeeRepository
     {
-        private static EmployeeRepository employeeRepository;
+        private static readonly EmployeeRepository employeeRepository = new EmployeeRepository();
         private ObservableCollection<Employee> employees;
 
         private EmployeeRepository()
@@ -24,21 +22,15 @@ namespace RaffleDraw.Data
             employees = new ObservableCollection<Employee>();
         }
 
-        public static EmployeeRepository Instance
-        {
-            get
-            {
-                if (employeeRepository == null)
-                    employeeRepository = new EmployeeRepository();
+        /// <summary>
+        /// 取得執行個體。
+        /// </summary>
+        public static EmployeeRepository Instance => employeeRepository;
 
-                return employeeRepository;
-            }
-        }
-
-        public ObservableCollection<Employee> Employees
-        {
-            get => employees;
-        }
+        /// <summary>
+        /// 取得員工。
+        /// </summary>
+        public ObservableCollection<Employee> Employees => employees;
 
         /// <summary>
         /// 傳回倉儲中符合指定之條件的實體。

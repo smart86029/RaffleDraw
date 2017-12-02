@@ -1,26 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Win32;
+using RaffleDraw.Common;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
+using RaffleDraw.Wpf.Views;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
+    /// <summary>
+    /// 員工檢視模型。
+    /// </summary>
     public class EmployeeViewModel : ViewModelBase
     {
+        //private CreateEmployeeView dialog = new CreateEmployeeView();
+        //private IDialogCoordinator dialogCoordinator = DialogCoordinator.Instance;
         private EmployeeRepository employeeRepository = EmployeeRepository.Instance;
-        //private ObservableCollection<Employee> employees;
         private string importEmployeeMessage;
-
+        
         public EmployeeViewModel()
         {
+
+            ShowCreateEmployeeDialogCommand = new RelayCommand(() => ShowCreateEmployeeDialog());
+            //HideCreateEmployeeDialogCommand = new RelayCommand(async () => await dialogCoordinator.HideMetroDialogAsync(this, dialog));
+            //CreateEmployeeCommand = new RelayCommand(() => ImportEmployee());
             ImportEmployeeCommand = new RelayCommand(() => ImportEmployee());
         }
 
@@ -31,19 +38,34 @@ namespace RaffleDraw.Wpf.ViewModels
         }
 
         /// <summary>
-        /// 回傳獎品清單
+        /// 取得員工清單。
         /// </summary>
-        public ObservableCollection<Employee> Employees
-        {
-            get => employeeRepository.Employees;
-        }
+        public ObservableCollection<Employee> Employees => employeeRepository.Employees;
 
         /// <summary>
-        /// 回傳瀏覽獎品命令
+        /// 取得或設定顯示新增員工方塊命令。
+        /// </summary>
+        public ICommand ShowCreateEmployeeDialogCommand { get; private set; }
+
+        /// <summary>
+        /// 取得或設定隱藏新增員工方塊命令。
+        /// </summary>
+        public ICommand HideCreateEmployeeDialogCommand { get; private set; }
+
+        /// <summary>
+        /// 取得或設定新增員工命令。
+        /// </summary>
+        public ICommand CreateEmployeeCommand { get; private set; }
+
+        /// <summary>
+        /// 取得或設定匯入員工命令。
         /// </summary>
         public ICommand ImportEmployeeCommand { get; private set; }
 
-
+        private void ShowCreateEmployeeDialog()
+        {
+            MessengerInstance.Send(new NotificationMessage("ShowCreateEmployeeDialog"));
+        }
 
         /// <summary>
         /// 載入獎品清單
@@ -52,15 +74,14 @@ namespace RaffleDraw.Wpf.ViewModels
         {
             var openFileDialog = new OpenFileDialog
             {
-                DefaultExt = ".xlsx",
-                Filter = "Excel 檔案 (*xls; *.xlsx; *.xlsm)|*xls; *.xlsx; *.xlsm|所有檔案 (*.*)|*.*"
+                DefaultExt = Constant.ExcelDefaultExtension,
+                Filter = Constant.ExcelFileFilter
             };
             var result = openFileDialog.ShowDialog();
             if (result.GetValueOrDefault())
             {
                 employeeRepository.LoadExcel(openFileDialog.FileName);
-                //Employees = employeeRepository.Employees;
-                ImportEmployeeMessage = "完成";
+                //ImportEmployeeMessage = "完成";
             }
         }
     }

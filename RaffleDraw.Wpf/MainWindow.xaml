@@ -1,24 +1,26 @@
 ﻿<controls:MetroWindow x:Class="RaffleDraw.Wpf.MainWindow"
                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                      xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
                       xmlns:local="clr-namespace:RaffleDraw.Wpf"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:views="clr-namespace:RaffleDraw.Wpf.Views"
-                      mc:Ignorable="d"
-                      Title="中華電信國際分公司感恩餐會抽獎查詢程式" Height="720" Width="1280"
-                      Icon="Images/logo.ico">
+                      Title="中華電信國際分公司感恩餐會抽獎查詢程式"
+                      Width="1280"
+                      Height="720"
+                      Icon="Images/logo.ico"
+                      mc:Ignorable="d">
     <Grid>
         <controls:MetroTabControl>
             <TabItem Header="員工">
-                <views:EmployeeView></views:EmployeeView>
+                <views:EmployeeView />
             </TabItem>
             <TabItem Header="獎品">
-                <views:PrizeView></views:PrizeView>
+                <views:PrizeView />
             </TabItem>
             <TabItem Header="結果">
-                <views:ResultView></views:ResultView>
+                <views:ResultView />
             </TabItem>
         </controls:MetroTabControl>
     </Grid>

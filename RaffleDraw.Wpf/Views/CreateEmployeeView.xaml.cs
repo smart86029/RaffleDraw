@@ -18,14 +18,13 @@ using MahApps.Metro.Controls.Dialogs;
 namespace RaffleDraw.Wpf.Views
 {
     /// <summary>
-    /// EmployeeView.xaml 的互動邏輯
+    /// CreateEmployeeView.xaml 的互動邏輯
     /// </summary>
-    public partial class EmployeeView : UserControl
+    public partial class CreateEmployeeView : CustomDialog
     {
-        private CreateEmployeeView dialog = new CreateEmployeeView();
         private IDialogCoordinator dialogCoordinator = DialogCoordinator.Instance;
 
-        public EmployeeView()
+        public CreateEmployeeView()
         {
             InitializeComponent();
             Messenger.Default.Register<NotificationMessage>(this, NotificationMessageReceivedAsync);
@@ -33,10 +32,9 @@ namespace RaffleDraw.Wpf.Views
 
         private async void NotificationMessageReceivedAsync(NotificationMessage message)
         {
-            if (message.Notification == "ShowCreateEmployeeDialog")
+            if (message.Notification == "HideCreateEmployeeDialog")
             {
-                
-                await dialogCoordinator.ShowMetroDialogAsync(DataContext, dialog);
+                await dialogCoordinator.HideMetroDialogAsync(DataContext, this);
             }
         }
     }

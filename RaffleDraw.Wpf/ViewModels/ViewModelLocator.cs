@@ -14,6 +14,7 @@
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 
 namespace RaffleDraw.Wpf.ViewModels
@@ -44,6 +45,7 @@ namespace RaffleDraw.Wpf.ViewModels
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<PrizeViewModel>();
+            SimpleIoc.Default.Register<CreateEmployeeViewModel>();
             SimpleIoc.Default.Register<EmployeeViewModel>();
             SimpleIoc.Default.Register<ResultViewModel>();
         }
@@ -51,6 +53,8 @@ namespace RaffleDraw.Wpf.ViewModels
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
 
         public PrizeViewModel PrizeViewModel => ServiceLocator.Current.GetInstance<PrizeViewModel>();
+
+        public CreateEmployeeViewModel CreateEmployeeViewModel => ServiceLocator.Current.GetInstance<CreateEmployeeViewModel>();
 
         public EmployeeViewModel EmployeeViewModel => ServiceLocator.Current.GetInstance<EmployeeViewModel>();
 

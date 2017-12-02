@@ -117,8 +117,8 @@ namespace RaffleDraw.Wpf.ViewModels
             var saveFileDialog = new SaveFileDialog
             {
                 FileName = fileName,
-                DefaultExt = ".xlsx",
-                Filter = "Excel 檔案 (*xls; *.xlsx; *.xlsm)|*xls; *.xlsx; *.xlsm|所有檔案 (*.*)|*.*"
+                DefaultExt = Constant.ExcelDefaultExtension,
+                Filter = Constant.ExcelFileFilter
             };
             var result = saveFileDialog.ShowDialog();
             if (result.GetValueOrDefault())

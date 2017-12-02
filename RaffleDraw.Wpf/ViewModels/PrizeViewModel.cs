@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
+using RaffleDraw.Common;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
 
@@ -48,10 +49,11 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         private void ImportPrize()
         {
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.DefaultExt = ".xlsx";
-            openFileDialog.Filter = "Excel 檔案 (*xls; *.xlsx; *.xlsm)|*xls; *.xlsx; *.xlsm|所有檔案 (*.*)|*.*";
-
+            var openFileDialog = new OpenFileDialog
+            {
+                DefaultExt = Constant.ExcelDefaultExtension,
+                Filter = Constant.ExcelFileFilter
+            };
             var result = openFileDialog.ShowDialog();
             if (result.GetValueOrDefault())
             {
