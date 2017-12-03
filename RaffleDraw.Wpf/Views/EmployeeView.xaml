@@ -32,12 +32,12 @@
         <DataGrid Grid.Row="2" Grid.ColumnSpan="2" Margin="5" AutoGenerateColumns="False" CanUserAddRows="False"
                   ItemsSource="{Binding Employees}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding SerialNumber}" Header="序號" />
-                <DataGridTextColumn Binding="{Binding Office}" Header="一級單位" />
-                <DataGridTextColumn Binding="{Binding Division}" Header="二級單位" />
-                <DataGridTextColumn Binding="{Binding EmployeeId}" Header="員工代號" />
-                <DataGridTextColumn Binding="{Binding Name}" Header="姓名" />
-                <DataGridTextColumn Header="" />
+                <DataGridTextColumn Width="100" Binding="{Binding SerialNumber}" Header="序號" />
+                <DataGridTextColumn Width="100" Binding="{Binding Office}" Header="一級單位" />
+                <DataGridTextColumn Width="100" Binding="{Binding Division}" Header="二級單位" />
+                <DataGridTextColumn Width="100" Binding="{Binding EmployeeId}" Header="員工代號" />
+                <DataGridTextColumn Width="100" Binding="{Binding Name}" Header="姓名" />
+                <DataGridTextColumn Width="*" Header="" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RaffleDraw.Wpf.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             d:DesignHeight="300"
-             d:DesignWidth="300"
+             d:DesignHeight="600"
+             d:DesignWidth="800"
              DataContext="{Binding Source={StaticResource Locator}, Path=ResultViewModel}"
              mc:Ignorable="d">
     <Grid>
@@ -18,9 +18,16 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <StackPanel Grid.Row="0" MinWidth="200">
             <TextBlock Text="抽獎" />
-            <Button Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ExportWinnerCommand}" Content="匯出" />
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button Margin="5" HorizontalAlignment="Center" VerticalAlignment="Top" Command="{Binding ExportWinnerCommand}" Content="匯出"
+                    Style="{DynamicResource SquareButtonStyle}" />
         </StackPanel>
         <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label Width="100" VerticalAlignment="Center" Content="獎項" />
@@ -44,7 +51,7 @@
             </TextBox>
             <Button HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SearchEmployeeCommand}" Content="搜尋" />
         </StackPanel>
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="獎項" FontSize="24" />
             <Label Width="150" Content="{Binding Prize.SerialNumber}" FontSize="32" />
             <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="數量" FontSize="24" />
@@ -54,8 +61,8 @@
             <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="提供者" FontSize="24" />
             <Label Content="{Binding Prize.Provider}" FontSize="32" />
         </StackPanel>
-        <Label Grid.Row="3" Content="{Binding Prize.Content}" FontSize="64" FontWeight="Bold" />
-        <StackPanel Grid.Row="4" Orientation="Horizontal">
+        <Label Grid.Row="3" Grid.ColumnSpan="2" Content="{Binding Prize.Content}" FontSize="64" FontWeight="Bold" />
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
             <Label Margin="0,0,20,0" Content="{Binding Employee.SerialNumber}" FontSize="48" FontWeight="Bold" />
             <Label Margin="0,0,20,0" Content="{Binding Employee.Office}" FontSize="48" FontWeight="Bold" />
             <Label Margin="0,0,20,0" Content="{Binding Employee.Division}" FontSize="48" FontWeight="Bold" />
@@ -63,16 +70,15 @@
             <Button Margin="0,0,20,0" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SaveWinnerCommand}" Content="儲存" />
             <Label VerticalAlignment="Center" Content="{Binding SaveWinnerMessage}" />
         </StackPanel>
-        <ListView Grid.Row="5" ItemsSource="{Binding Prize.Winners}">
-            <ListView.View>
-                <GridView AllowsColumnReorder="true">
-                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=SerialNumber}" Header="序號" />
-                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Office}" Header="一級單位" />
-                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Division}" Header="二級單位" />
-                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=EmployeeID}" Header="員工代號" />
-                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding Path=Name}" Header="姓名" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Margin="5" AutoGenerateColumns="False" CanUserAddRows="False"
+                  IsReadOnly="True" ItemsSource="{Binding Prize.Winners}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="100" Binding="{Binding Path=SerialNumber}" Header="序號" />
+                <DataGridTextColumn Width="100" Binding="{Binding Path=Office}" Header="一級單位" />
+                <DataGridTextColumn Width="100" Binding="{Binding Path=Division}" Header="二級單位" />
+                <DataGridTextColumn Width="100" Binding="{Binding Path=EmployeeID}" Header="員工代號" />
+                <DataGridTextColumn Width="200" Binding="{Binding Path=Name}" Header="姓名" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

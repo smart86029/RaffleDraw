@@ -3,7 +3,6 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.Win32;
 using RaffleDraw.Common;
 using RaffleDraw.Data;
@@ -11,21 +10,21 @@ using RaffleDraw.Models;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
+    /// <summary>
+    /// 獎項檢視模型。
+    /// </summary>
     public class PrizeViewModel : ViewModelBase
     {
         private PrizeRepository prizeRepository = PrizeRepository.Instance;
         private string importPrizeMessage;
 
+        /// <summary>
+        /// 初始化獎項檢視模型的執行個體。
+        /// </summary>
         public PrizeViewModel()
         {
             ShowCreatePrizeDialogCommand = new RelayCommand(() => ShowCreatePrizeDialog());
             ImportPrizeCommand = new RelayCommand(() => ImportPrize());
-        }
-
-        public string ImportPrizeMessage
-        {
-            get => importPrizeMessage;
-            set => Set(ref importPrizeMessage, value);
         }
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace RaffleDraw.Wpf.ViewModels
         public ICommand ShowCreatePrizeDialogCommand { get; private set; }
 
         /// <summary>
-        /// 回傳瀏覽獎品命令
+        /// 取得或設定匯入獎項命令。
         /// </summary>
         public ICommand ImportPrizeCommand { get; private set; }
 
@@ -43,13 +42,16 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         public ObservableCollection<Prize> Prizes => prizeRepository.Prizes;
 
+        /// <summary>
+        /// 顯示新增員工方塊。
+        /// </summary>
         private void ShowCreatePrizeDialog()
         {
             MessengerInstance.Send(new NotificationMessage("ShowCreatePrizeDialog"));
         }
 
         /// <summary>
-        /// 載入獎品清單
+        /// 匯入獎項。
         /// </summary>
         private void ImportPrize()
         {
@@ -60,15 +62,7 @@ namespace RaffleDraw.Wpf.ViewModels
             };
             var result = openFileDialog.ShowDialog();
             if (result.GetValueOrDefault())
-            {
                 prizeRepository.LoadExcel(openFileDialog.FileName);
-
-                var resultViewModel = ServiceLocator.Current.GetInstance<ResultViewModel>();
-                foreach (var prize in prizeRepository.Prizes)
-                    resultViewModel.Prizes.Add(prize);
-
-                ImportPrizeMessage = "完成";
-            }
         }
     }
 }

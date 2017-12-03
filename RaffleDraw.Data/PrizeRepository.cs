@@ -16,7 +16,7 @@ namespace RaffleDraw.Data
     /// </summary>
     public class PrizeRepository : IPrizeRepository
     {
-        private static PrizeRepository prizeRepository;
+        private static PrizeRepository prizeRepository = new PrizeRepository();
         private ObservableCollection<Prize> prizes;
 
         private PrizeRepository()
@@ -24,21 +24,9 @@ namespace RaffleDraw.Data
             prizes = new ObservableCollection<Prize>();
         }
 
-        public static PrizeRepository Instance
-        {
-            get
-            {
-                if (prizeRepository == null)
-                    prizeRepository = new PrizeRepository();
+        public static PrizeRepository Instance => prizeRepository;
 
-                return prizeRepository;
-            }
-        }
-
-        public ObservableCollection<Prize>  Prizes
-        {
-            get => prizes;
-        }
+        public ObservableCollection<Prize> Prizes => prizes;
 
         /// <summary>
         /// 傳回倉儲中符合指定之條件的實體。
