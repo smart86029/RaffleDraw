@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
+using RaffleDraw.Common;
 
 namespace RaffleDraw.Wpf.Views
 {
@@ -23,6 +26,26 @@ namespace RaffleDraw.Wpf.Views
         public ResultView()
         {
             InitializeComponent();
+            Messenger.Default.Register<NotificationMessageAction<string>>(this, NotificationMessageActionReceived);
+        }
+
+        private void NotificationMessageActionReceived<T>(NotificationMessageAction<T> message)
+        {
+            switch (message.Notification)
+            {
+                case "ExportWinner":
+                    var fileName = $"中獎名單{DateTime.Now.ToString("MMdd")}.xlsx";
+                    var saveFileDialog = new SaveFileDialog
+                    {
+                        FileName = fileName,
+                        DefaultExt = Constant.ExcelDefaultExtension,
+                        Filter = Constant.ExcelFileFilter
+                    };
+                    var result = saveFileDialog.ShowDialog();
+                    if (result.GetValueOrDefault())
+                        message.Execute(saveFileDialog.FileName);
+                    break;
+            }
         }
     }
 }

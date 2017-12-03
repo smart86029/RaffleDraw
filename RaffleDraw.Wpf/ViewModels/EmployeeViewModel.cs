@@ -3,8 +3,6 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Win32;
-using RaffleDraw.Common;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
 
@@ -61,17 +59,11 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         private void ImportEmployee()
         {
-            var openFileDialog = new OpenFileDialog
-            {
-                DefaultExt = Constant.ExcelDefaultExtension,
-                Filter = Constant.ExcelFileFilter
-            };
-            var result = openFileDialog.ShowDialog();
-            if (result.GetValueOrDefault())
-            {
-                employeeRepository.LoadExcel(openFileDialog.FileName);
-                //ImportEmployeeMessage = "完成";
-            }
+            var fileName = string.Empty;
+
+            MessengerInstance.Send(new NotificationMessageAction<string>("ImportEmployee", x => fileName = x));
+            if (!string.IsNullOrWhiteSpace(fileName))
+                employeeRepository.LoadExcel(fileName);
         }
     }
 }

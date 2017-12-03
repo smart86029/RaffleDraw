@@ -3,8 +3,6 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Win32;
-using RaffleDraw.Common;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
 
@@ -16,7 +14,6 @@ namespace RaffleDraw.Wpf.ViewModels
     public class PrizeViewModel : ViewModelBase
     {
         private PrizeRepository prizeRepository = PrizeRepository.Instance;
-        private string importPrizeMessage;
 
         /// <summary>
         /// 初始化獎項檢視模型的執行個體。
@@ -55,14 +52,11 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         private void ImportPrize()
         {
-            var openFileDialog = new OpenFileDialog
-            {
-                DefaultExt = Constant.ExcelDefaultExtension,
-                Filter = Constant.ExcelFileFilter
-            };
-            var result = openFileDialog.ShowDialog();
-            if (result.GetValueOrDefault())
-                prizeRepository.LoadExcel(openFileDialog.FileName);
+            var fileName = string.Empty;
+
+            MessengerInstance.Send(new NotificationMessageAction<string>("ImportPrize", x => fileName = x));
+            if (!string.IsNullOrWhiteSpace(fileName))
+                prizeRepository.LoadExcel(fileName);
         }
     }
 }

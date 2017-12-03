@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Win32;
+using RaffleDraw.Common;
 
 namespace RaffleDraw.Wpf.Views
 {
@@ -29,12 +18,34 @@ namespace RaffleDraw.Wpf.Views
         {
             InitializeComponent();
             Messenger.Default.Register<NotificationMessage>(this, NotificationMessageReceivedAsync);
+            Messenger.Default.Register<NotificationMessageAction<string>>(this, NotificationMessageActionReceived);
         }
 
         private async void NotificationMessageReceivedAsync(NotificationMessage message)
         {
-            if (message.Notification == "ShowCreateEmployeeDialog")
-                await dialogCoordinator.ShowMetroDialogAsync(DataContext, dialog);
+            switch (message.Notification)
+            {
+                case "ShowCreateEmployeeDialog":
+                    await dialogCoordinator.ShowMetroDialogAsync(DataContext, dialog);
+                    break;
+            }
+        }
+
+        private void NotificationMessageActionReceived<T>(NotificationMessageAction<T> message)
+        {
+            switch (message.Notification)
+            {
+                case "ImportEmployee":
+                    var openFileDialog = new OpenFileDialog
+                    {
+                        DefaultExt = Constant.ExcelDefaultExtension,
+                        Filter = Constant.ExcelFileFilter
+                    };
+                    var result = openFileDialog.ShowDialog();
+                    if (result.GetValueOrDefault())
+                        message.Execute(openFileDialog.FileName);
+                    break;
+            }
         }
     }
 }

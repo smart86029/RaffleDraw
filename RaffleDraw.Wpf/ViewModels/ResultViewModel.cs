@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
 using System.Windows.Input;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using Microsoft.Win32;
+using GalaSoft.MvvmLight.Messaging;
 using RaffleDraw.Common;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
@@ -131,16 +130,11 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         private void ExportWinner()
         {
-            var fileName = $"中獎名單{DateTime.Now.ToString("MMdd")}.xlsx";
-            var saveFileDialog = new SaveFileDialog
-            {
-                FileName = fileName,
-                DefaultExt = Constant.ExcelDefaultExtension,
-                Filter = Constant.ExcelFileFilter
-            };
-            var result = saveFileDialog.ShowDialog();
-            if (result.GetValueOrDefault())
-                SaveWinningExcel(saveFileDialog.FileName);
+            var fileName = string.Empty;
+
+            MessengerInstance.Send(new NotificationMessageAction<string>("ExportWinner", x => fileName = x));
+            if (!string.IsNullOrWhiteSpace(fileName))
+                SaveWinningExcel(fileName);
         }
 
         /// <summary>
