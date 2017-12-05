@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Messaging;
 using RaffleDraw.Common;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
+using System.Collections.Generic;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
@@ -143,12 +144,13 @@ namespace RaffleDraw.Wpf.ViewModels
         /// <param name="fileName">檔案名稱。</param>
         private void SaveWinningExcel(string fileName)
         {
-            var dataTable = new DataTable();
+            var dataTables = new List<DataTable>();
+            var dataTable = new DataTable("中獎名單");
             dataTable.Columns.Add("序號", typeof(string));
-            dataTable.Columns.Add("員工代號", typeof(string));
-            dataTable.Columns.Add("姓名", typeof(string));
             dataTable.Columns.Add("一級單位", typeof(string));
             dataTable.Columns.Add("二級單位", typeof(string));
+            dataTable.Columns.Add("員工代號", typeof(string));
+            dataTable.Columns.Add("姓名", typeof(string));
             dataTable.Columns.Add("獎項", typeof(string));
             dataTable.Columns.Add("獎品", typeof(string));
             dataTable.Columns.Add("提供者", typeof(string));
@@ -156,10 +158,23 @@ namespace RaffleDraw.Wpf.ViewModels
 
             foreach (var prize in prizeRepository.Prizes.Where(p => p.Winners.Count > 0))
                 foreach (var winner in prize.Winners)
-                    dataTable.Rows.Add(new object[] { winner.SerialNumber, winner.EmployeeId, winner.Name, winner.Office, winner.Division,
+                    dataTable.Rows.Add(new object[] { winner.SerialNumber, winner.Office, winner.Division,winner.EmployeeId, winner.Name,
                         prize.SerialNumber, prize.Content, prize.Provider, string.Empty });
 
-            ExcelUtility.Write(fileName, dataTable);
+            dataTables.Add(dataTable);
+
+            dataTable = new DataTable("未中獎名單");
+            dataTable.Columns.Add("序號", typeof(string));
+            dataTable.Columns.Add("一級單位", typeof(string));
+            dataTable.Columns.Add("二級單位", typeof(string));
+            dataTable.Columns.Add("員工代號", typeof(string));
+            dataTable.Columns.Add("姓名", typeof(string));
+
+            foreach (var employee in employeeRepository.Employees.Where(e => e.Prize == null))
+                dataTable.Rows.Add(new object[] { employee.SerialNumber, employee.Office, employee.Division, employee.EmployeeId, employee.Name });
+
+            dataTables.Add(dataTable);
+            ExcelUtility.Write(fileName, dataTables);
         }
 
         /// <summary>
@@ -177,7 +192,7 @@ namespace RaffleDraw.Wpf.ViewModels
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    foreach (Prize item in e.NewItems)
+                    foreach (Prize item in e.OldItems)
                         Prizes.Remove(item);
                     break;
             }

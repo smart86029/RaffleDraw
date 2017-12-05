@@ -8,7 +8,7 @@
                       d:DesignHeight="300"
                       d:DesignWidth="800"
                       dialogs:DialogParticipation.Register="{Binding}"
-                      DataContext="{Binding Source={StaticResource Locator}, Path=CreateEmployeeViewModel}"
+                      DataContext="{Binding CreateEmployeeViewModel, Source={StaticResource Locator}}"
                       mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>

@@ -1,10 +1,10 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
@@ -22,6 +22,7 @@ namespace RaffleDraw.Wpf.ViewModels
         {
             ShowCreatePrizeDialogCommand = new RelayCommand(() => ShowCreatePrizeDialog());
             ImportPrizeCommand = new RelayCommand(() => ImportPrize());
+            DeletePrizeCommand = new RelayCommand<Prize>(p => DeletePrize(p));
         }
 
         /// <summary>
@@ -35,7 +36,12 @@ namespace RaffleDraw.Wpf.ViewModels
         public ICommand ImportPrizeCommand { get; private set; }
 
         /// <summary>
-        /// 回傳獎品清單
+        /// 取得或設定刪除獎項命令。
+        /// </summary>
+        public ICommand DeletePrizeCommand { get; private set; }
+
+        /// <summary>
+        /// 取得獎項清單。
         /// </summary>
         public ObservableCollection<Prize> Prizes => prizeRepository.Prizes;
 
@@ -57,6 +63,15 @@ namespace RaffleDraw.Wpf.ViewModels
             MessengerInstance.Send(new NotificationMessageAction<string>("ImportPrize", x => fileName = x));
             if (!string.IsNullOrWhiteSpace(fileName))
                 prizeRepository.LoadExcel(fileName);
+        }
+
+        /// <summary>
+        /// 刪除獎項。
+        /// </summary>
+        /// <param name="prize">獎項。</param>
+        private void DeletePrize(Prize prize)
+        {
+            prizeRepository.Prizes.Remove(prize);
         }
     }
 }

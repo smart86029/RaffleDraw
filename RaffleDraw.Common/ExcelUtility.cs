@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using NPOI.XSSF.UserModel;
+using System.Collections.Generic;
 
 namespace RaffleDraw.Common
 {
@@ -61,25 +62,29 @@ namespace RaffleDraw.Common
         /// 寫入 Excel。
         /// </summary>
         /// <param name="fileName">檔案名稱。</param>
-        /// <param name="dataTable">資料表。</param>
-        public static void Write(string fileName, DataTable dataTable)
+        /// <param name="dataTables">資料表。</param>
+        public static void Write(string fileName, List<DataTable> dataTables)
         {
             var workbook = new XSSFWorkbook();
-            var sheet = workbook.CreateSheet();
-            var headerRow = sheet.CreateRow(0);
 
-            foreach (DataColumn column in dataTable.Columns)
-                headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
-
-            var rowIndex = 1;
-            foreach (DataRow row in dataTable.Rows)
+            foreach (var dataTable in dataTables)
             {
-                var dataRow = sheet.CreateRow(rowIndex) as XSSFRow;
+                var sheet = string.IsNullOrWhiteSpace(dataTable.TableName) ? workbook.CreateSheet() : workbook.CreateSheet(dataTable.TableName);
+                var headerRow = sheet.CreateRow(0);
 
                 foreach (DataColumn column in dataTable.Columns)
-                    dataRow.CreateCell(column.Ordinal).SetCellValue(row[column].ToString());
+                    headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
 
-                rowIndex++;
+                var rowIndex = 1;
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    var dataRow = sheet.CreateRow(rowIndex) as XSSFRow;
+
+                    foreach (DataColumn column in dataTable.Columns)
+                        dataRow.CreateCell(column.Ordinal).SetCellValue(row[column].ToString());
+
+                    rowIndex++;
+                }
             }
 
             using (var fileStream = new FileStream(fileName, FileMode.Create, FileAccess.Write))
