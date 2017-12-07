@@ -25,6 +25,7 @@ namespace RaffleDraw.Wpf.ViewModels
         private ObservableCollection<Prize> prizes = new ObservableCollection<Prize>();
         private string searchSerialNumber = string.Empty;
         private string saveWinnerMessage = string.Empty;
+        private bool shouldExport;
 
         /// <summary>
         /// 初始化結果檢視模型的執行個體。
@@ -91,6 +92,15 @@ namespace RaffleDraw.Wpf.ViewModels
         }
 
         /// <summary>
+        /// 取得或設定是否應該匯出。
+        /// </summary>
+        public bool ShouldExport
+        {
+            get => shouldExport;
+            set => Set(ref shouldExport, value);
+        }
+
+        /// <summary>
         /// 搜尋員工。
         /// </summary>
         private void SearchEmployee()
@@ -119,6 +129,7 @@ namespace RaffleDraw.Wpf.ViewModels
 
             Prize.Winners.Add(Employee);
             Employee.Prize = Prize;
+            ShouldExport = true;
             Employee = null;
             SearchSerialNumber = string.Empty;
             SaveWinnerMessage = string.Empty;
@@ -175,6 +186,7 @@ namespace RaffleDraw.Wpf.ViewModels
 
             dataTables.Add(dataTable);
             ExcelUtility.Write(fileName, dataTables);
+            ShouldExport = false;
         }
 
         /// <summary>
