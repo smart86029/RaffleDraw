@@ -46,7 +46,7 @@ namespace RaffleDraw.Wpf.ViewModels
             SimpleIoc.Default.Register<CreateEmployeeViewModel>();
             SimpleIoc.Default.Register<PrizeViewModel>();
             SimpleIoc.Default.Register<CreatePrizeViewModel>();
-            SimpleIoc.Default.Register<ResultViewModel>();
+            SimpleIoc.Default.Register<RecordViewModel>();
         }
 
         public MainViewModel MainViewModel => ServiceLocator.Current.GetInstance<MainViewModel>();
@@ -54,7 +54,7 @@ namespace RaffleDraw.Wpf.ViewModels
         public CreateEmployeeViewModel CreateEmployeeViewModel => ServiceLocator.Current.GetInstance<CreateEmployeeViewModel>();
         public PrizeViewModel PrizeViewModel => ServiceLocator.Current.GetInstance<PrizeViewModel>();
         public CreatePrizeViewModel CreatePrizeViewModel => ServiceLocator.Current.GetInstance<CreatePrizeViewModel>();
-        public ResultViewModel ResultViewModel => ServiceLocator.Current.GetInstance<ResultViewModel>();
+        public RecordViewModel RecordViewModel => ServiceLocator.Current.GetInstance<RecordViewModel>();
 
         public static void Cleanup()
         {

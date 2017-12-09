@@ -16,11 +16,11 @@
             <TabItem Header="員工">
                 <views:EmployeeView />
             </TabItem>
-            <TabItem Header="獎品">
+            <TabItem Header="獎項">
                 <views:PrizeView />
             </TabItem>
-            <TabItem Header="結果">
-                <views:ResultView />
+            <TabItem Header="紀錄">
+                <views:RecordView />
             </TabItem>
         </controls:MetroTabControl>
     </Grid>

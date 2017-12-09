@@ -88,7 +88,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\EmployeeViewModel.cs" />
     <Compile Include="ViewModels\PrizeViewModel.cs" />
-    <Compile Include="ViewModels\ResultViewModel.cs" />
+    <Compile Include="ViewModels\RecordViewModel.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
     <Compile Include="Views\CreatePrizeView.xaml.cs">
       <DependentUpon>CreatePrizeView.xaml</DependentUpon>
@@ -102,8 +102,8 @@
     <Compile Include="Views\PrizeView.xaml.cs">
       <DependentUpon>PrizeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ResultView.xaml.cs">
-      <DependentUpon>ResultView.xaml</DependentUpon>
+    <Compile Include="Views\RecordView.xaml.cs">
+      <DependentUpon>RecordView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -133,7 +133,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ResultView.xaml">
+    <Page Include="Views\RecordView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

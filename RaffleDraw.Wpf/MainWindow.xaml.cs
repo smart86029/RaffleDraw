@@ -54,7 +54,7 @@ namespace RaffleDraw.Wpf
         /// <returns>非同步作業。</returns>
         private async Task CheckExportAsync()
         {
-            var resultViewModel = ServiceLocator.Current.GetInstance<ResultViewModel>();
+            var resultViewModel = ServiceLocator.Current.GetInstance<RecordViewModel>();
             var settings = new MetroDialogSettings
             {
                 AffirmativeButtonText = "是",

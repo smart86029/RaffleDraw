@@ -21,9 +21,9 @@ namespace RaffleDraw.Wpf.Views
     /// <summary>
     /// ResultView.xaml 的互動邏輯
     /// </summary>
-    public partial class ResultView : UserControl
+    public partial class RecordView : UserControl
     {
-        public ResultView()
+        public RecordView()
         {
             InitializeComponent();
             Messenger.Default.Register<NotificationMessageAction<string>>(this, NotificationMessageActionReceived);

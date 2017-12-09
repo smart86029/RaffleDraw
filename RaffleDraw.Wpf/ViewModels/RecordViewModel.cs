@@ -14,9 +14,9 @@ using System.Collections.Generic;
 namespace RaffleDraw.Wpf.ViewModels
 {
     /// <summary>
-    /// 結果檢視模型。
+    /// 紀錄檢視模型。
     /// </summary>
-    public class ResultViewModel : ViewModelBase
+    public class RecordViewModel : ViewModelBase
     {
         private EmployeeRepository employeeRepository = EmployeeRepository.Instance;
         private PrizeRepository prizeRepository = PrizeRepository.Instance;
@@ -28,9 +28,9 @@ namespace RaffleDraw.Wpf.ViewModels
         private bool shouldExport;
 
         /// <summary>
-        /// 初始化結果檢視模型的執行個體。
+        /// 初始化紀錄檢視模型的執行個體。
         /// </summary>
-        public ResultViewModel()
+        public RecordViewModel()
         {
             prizeRepository.Prizes.CollectionChanged += OnCollectionChanged;
         }
@@ -44,6 +44,11 @@ namespace RaffleDraw.Wpf.ViewModels
         /// 取得或設定儲存中獎者命令。
         /// </summary>
         public ICommand SaveWinnerCommand => new RelayCommand(() => SaveWinner());
+
+        /// <summary>
+        /// 取得或設定取消中獎者命令。
+        /// </summary>
+        public ICommand CancelWinnerCommand => new RelayCommand<Employee>(e => CancelWinner(e));
 
         /// <summary>
         /// 取得或設定匯出中獎者命令。
@@ -135,6 +140,18 @@ namespace RaffleDraw.Wpf.ViewModels
             SaveWinnerMessage = string.Empty;
             if (prize.Quentity <= prize.Winners.Count)
                 Prizes.Remove(prize);
+        }
+
+        /// <summary>
+        /// 取消中獎者。
+        /// </summary>
+        private void CancelWinner(Employee employee)
+        {
+            Prize.Winners.Remove(employee);
+            employee.Prize = null;
+            ShouldExport = true;
+            //if (prize.Quentity > prize.Winners.Count)
+            //    Prizes.Add(prize);
         }
 
         /// <summary>
