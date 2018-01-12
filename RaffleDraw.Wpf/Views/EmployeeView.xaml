@@ -34,6 +34,7 @@
                 <DataGridTextColumn Width="100" Binding="{Binding Division}" Header="二級單位" />
                 <DataGridTextColumn Width="100" Binding="{Binding EmployeeId}" Header="員工代號" />
                 <DataGridTextColumn Width="100" Binding="{Binding Name}" Header="姓名" />
+                <DataGridTextColumn Width="100" Binding="{Binding Prize.Content}" Header="中獎" />
                 <DataGridTextColumn Width="*" />
             </DataGrid.Columns>
         </DataGrid>

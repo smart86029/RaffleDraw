@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Data;
 using System.Linq;
@@ -9,7 +10,6 @@ using GalaSoft.MvvmLight.Messaging;
 using RaffleDraw.Common;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
-using System.Collections.Generic;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
@@ -23,6 +23,7 @@ namespace RaffleDraw.Wpf.ViewModels
         private Employee employee;
         private Prize prize;
         private ObservableCollection<Prize> prizes = new ObservableCollection<Prize>();
+        private ObservableCollection<Employee> winners = new ObservableCollection<Employee>();
         private string searchSerialNumber = string.Empty;
         private string saveWinnerMessage = string.Empty;
         private bool shouldExport;
@@ -79,6 +80,11 @@ namespace RaffleDraw.Wpf.ViewModels
         public ObservableCollection<Prize> Prizes => prizes;
 
         /// <summary>
+        /// 回傳中獎者清單。
+        /// </summary>
+        public ObservableCollection<Employee> Winners => winners;
+
+        /// <summary>
         /// 取得或設定搜尋序號。
         /// </summary>
         public string SearchSerialNumber
@@ -133,6 +139,7 @@ namespace RaffleDraw.Wpf.ViewModels
                 SaveWinnerMessage = "此獎已滿額";
 
             Prize.Winners.Add(Employee);
+            Winners.Add(Employee);
             Employee.Prize = Prize;
             ShouldExport = true;
             Employee = null;
@@ -147,11 +154,17 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         private void CancelWinner(Employee employee)
         {
-            Prize.Winners.Remove(employee);
+            employee.Prize.Winners.Remove(employee);
+            Winners.Remove(employee);
+            if (employee.Prize.Quentity > employee.Prize.Winners.Count)
+            {
+                Prizes.Add(employee.Prize);
+                prizes = new ObservableCollection<Prize>(Prizes.OrderBy(p => p.SerialNumber.PadLeft(Constant.SerialNumberToatalWidth)));
+                RaisePropertyChanged(nameof(Prizes));
+            }
+
             employee.Prize = null;
             ShouldExport = true;
-            //if (prize.Quentity > prize.Winners.Count)
-            //    Prizes.Add(prize);
         }
 
         /// <summary>

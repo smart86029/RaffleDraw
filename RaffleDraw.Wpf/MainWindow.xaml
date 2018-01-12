@@ -22,6 +22,9 @@
             <TabItem Header="紀錄">
                 <views:RecordView />
             </TabItem>
+            <TabItem Header="結果">
+                <views:ResultView />
+            </TabItem>
         </controls:MetroTabControl>
     </Grid>
 </controls:MetroWindow>

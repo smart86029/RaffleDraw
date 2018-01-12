@@ -13,6 +13,7 @@ namespace RaffleDraw.Models
         private string name;
         private string office;
         private string division;
+        private Prize prize;
 
         /// <summary>
         /// 取得或設定序號。
@@ -73,6 +74,11 @@ namespace RaffleDraw.Models
         /// <summary>
         /// 取得或設定中的獎項。
         /// </summary>
-        public virtual Prize Prize { get; set; }
+        public virtual Prize Prize
+
+        {
+            get => prize;
+            set => Set(ref prize, value);
+        }
     }
 }

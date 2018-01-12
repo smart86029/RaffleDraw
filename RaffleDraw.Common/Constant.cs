@@ -14,5 +14,10 @@
         /// Excel 檔案篩選字串。
         /// </summary>
         public const string ExcelFileFilter = "Excel 檔案 (*xls; *.xlsx; *.xlsm)|*xls; *.xlsx; *.xlsm|所有檔案 (*.*)|*.*";
+
+        /// <summary>
+        /// 序號總長度。
+        /// </summary>
+        public const int SerialNumberToatalWidth = 5;
     }
 }
