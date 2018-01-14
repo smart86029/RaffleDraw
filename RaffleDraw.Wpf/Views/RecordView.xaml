@@ -68,19 +68,19 @@
             <Label VerticalAlignment="Center" Content="{Binding SaveWinnerMessage}" />
         </StackPanel>
         <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Margin="5" AutoGenerateColumns="False" CanUserAddRows="False"
-                  IsReadOnly="True" ItemsSource="{Binding Prize.Winners}">
+                  FontSize="24" IsReadOnly="True" ItemsSource="{Binding Prize.Winners}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="100" Binding="{Binding Path=SerialNumber}" Header="序號" />
-                <DataGridTextColumn Width="100" Binding="{Binding Path=Office}" Header="一級單位" />
-                <DataGridTextColumn Width="100" Binding="{Binding Path=Division}" Header="二級單位" />
-                <DataGridTextColumn Width="100" Binding="{Binding Path=EmployeeId}" Header="員工代號" />
+                <DataGridTextColumn Width="150" Binding="{Binding Path=SerialNumber}" Header="序號" />
+                <DataGridTextColumn Width="150" Binding="{Binding Path=Office}" Header="一級單位" />
+                <DataGridTextColumn Width="150" Binding="{Binding Path=Division}" Header="二級單位" />
+                <DataGridTextColumn Width="150" Binding="{Binding Path=EmployeeId}" Header="員工代號" />
                 <DataGridTextColumn Width="200" Binding="{Binding Path=Name}" Header="姓名" />
                 <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Width="34" HorizontalAlignment="Left"
                                     Command="{Binding RecordViewModel.CancelWinnerCommand, Source={StaticResource Locator}}" CommandParameter="{Binding}"
-                                    Content="取消" Style="{DynamicResource SquareButtonStyle}" />
+                                    Content="取消" FontSize="12" Style="{DynamicResource SquareButtonStyle}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

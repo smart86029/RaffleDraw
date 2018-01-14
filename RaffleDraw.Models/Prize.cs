@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using GalaSoft.MvvmLight;
 
 namespace RaffleDraw.Models
@@ -7,7 +6,7 @@ namespace RaffleDraw.Models
     /// <summary>
     /// 獎項類別。
     /// </summary>
-    public class Prize:ObservableObject
+    public class Prize : ObservableObject
     {
         private string serialNumber;
         private int quentity;

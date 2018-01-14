@@ -12,10 +12,17 @@ using RaffleDraw.Models;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
+    /// <summary>
+    /// 新增員工檢視模型。
+    /// </summary>
     public class CreateEmployeeViewModel : ViewModelBase
     {
         private EmployeeRepository employeeRepository = EmployeeRepository.Instance;
+        private Employee employee = new Employee();
 
+        /// <summary>
+        /// 初始化新增員工檢視模型的執行個體。
+        /// </summary>
         public CreateEmployeeViewModel()
         {
             CreateEmployeeCommand = new RelayCommand(() => CreateEmployee());
@@ -28,17 +35,24 @@ namespace RaffleDraw.Wpf.ViewModels
         public ICommand CreateEmployeeCommand { get; private set; }
 
         /// <summary>
-        /// 隱藏新增員工對話方塊。
+        /// 取得或設定隱藏新增員工對話方塊。
         /// </summary>
         public ICommand HideCreateEmployeeDialogCommand { get; private set; }
 
         /// <summary>
         /// 取得或設定員工。
         /// </summary>
-        public Employee Employee { get; set; } = new Employee();
+        public Employee Employee
+        {
+            get => employee;
+            set => Set(ref employee, value);
+        }
 
         public string Message { get; set; }
 
+        /// <summary>
+        /// 新增員工。
+        /// </summary>
         private void CreateEmployee()
         {
             employeeRepository.Employees.Add(Employee);
@@ -48,6 +62,9 @@ namespace RaffleDraw.Wpf.ViewModels
             //    Message = "重複";
         }
 
+        /// <summary>
+        /// 隱藏新增員工對話方塊。
+        /// </summary>
         private void HideCreateEmployeeDialog()
         {
             MessengerInstance.Send(new NotificationMessage("HideCreateEmployeeDialog"));
