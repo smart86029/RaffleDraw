@@ -5,7 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using MahApps.Metro;
+using RaffleDraw.Common;
 
 namespace RaffleDraw.Wpf
 {
@@ -29,5 +31,11 @@ namespace RaffleDraw.Wpf
 
         //    base.OnStartup(e);
         //}
+
+        private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            LogUtility.Error(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), e.Exception);
+            e.Handled = true;
+        }
     }
 }
