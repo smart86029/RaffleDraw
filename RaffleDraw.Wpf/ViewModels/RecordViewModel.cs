@@ -117,11 +117,16 @@ namespace RaffleDraw.Wpf.ViewModels
         private void SearchEmployee()
         {
             var employee = employeeRepository.Employees.SingleOrDefault(e => e.SerialNumber == SearchSerialNumber);
-            if (employee != null)
+            if (employee == null)
+                return;
+
+            Employee = employee;
+            SaveWinnerMessage = string.Empty;
+            if (employee.Prize != null)
             {
-                Employee = employee;
-                //SaveWinnerMessage = "";
-            }
+                SaveWinnerMessage = "重複中獎";
+                return;
+            }   
         }
 
         /// <summary>
@@ -130,13 +135,25 @@ namespace RaffleDraw.Wpf.ViewModels
         private void SaveWinner()
         {
             if (employee == null)
+            {
                 SaveWinnerMessage = "請選擇員工";
-            if (employee.Prize == null)
+                return;
+            }
+            if (employee.Prize != null)
+            {
                 SaveWinnerMessage = "重複中獎";
+                return;
+            }
             if (prize == null)
+            {
                 SaveWinnerMessage = "請選擇獎項";
+                return;
+            }
             if (prize.Quentity <= prize.Winners.Count)
+            {
                 SaveWinnerMessage = "此獎已滿額";
+                return;
+            }
 
             Prize.Winners.Add(Employee);
             Winners.Add(Employee);

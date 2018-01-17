@@ -49,23 +49,24 @@
             <Button HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SearchEmployeeCommand}" Content="搜尋" />
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="獎項" FontSize="24" />
-            <Label Width="150" Content="{Binding Prize.SerialNumber}" FontSize="32" />
-            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="數量" FontSize="24" />
-            <Label Width="50" Content="{Binding Prize.Quentity}" FontSize="32" />
-            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="已抽" FontSize="24" />
-            <Label Width="50" Content="{Binding Prize.Winners.Count}" FontSize="32" />
-            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="提供者" FontSize="24" />
-            <Label Content="{Binding Prize.Provider}" FontSize="32" />
+            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="獎項" FontSize="24" Foreground="Blue" />
+            <Label Width="150" Content="{Binding Prize.SerialNumber}" FontSize="32" Foreground="Blue" />
+            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="數量" FontSize="24" Foreground="Blue" />
+            <Label Width="50" Content="{Binding Prize.Quentity}" FontSize="32" Foreground="Blue" />
+            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="已抽" FontSize="24" Foreground="Blue" />
+            <Label Width="50" Content="{Binding Prize.Winners.Count}" FontSize="32" Foreground="Blue" />
+            <Label Margin="0,0,20,0" VerticalAlignment="Center" Content="提供者" FontSize="24" Foreground="Blue" />
+            <Label Content="{Binding Prize.Provider}" FontSize="32" Foreground="Blue" />
         </StackPanel>
-        <Label Grid.Row="3" Grid.ColumnSpan="2" Content="{Binding Prize.Content}" FontSize="64" FontWeight="Bold" />
+        <Label Grid.Row="3" Grid.ColumnSpan="2" Content="{Binding Prize.Content}" FontSize="64" FontWeight="Bold"
+               Foreground="Red" />
         <StackPanel Grid.Row="4" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Label Margin="0,0,20,0" Content="{Binding Employee.SerialNumber}" FontSize="48" FontWeight="Bold" />
-            <Label Margin="0,0,20,0" Content="{Binding Employee.Office}" FontSize="48" FontWeight="Bold" />
-            <Label Margin="0,0,20,0" Content="{Binding Employee.Division}" FontSize="48" FontWeight="Bold" />
-            <Label Margin="0,0,20,0" Content="{Binding Employee.Name}" FontSize="48" FontWeight="Bold" />
+            <Label Margin="0,0,20,0" Content="{Binding Employee.SerialNumber}" FontSize="48" FontWeight="Bold" Foreground="Blue" />
+            <Label Margin="0,0,20,0" Content="{Binding Employee.Office}" FontSize="48" FontWeight="Bold" Foreground="Blue" />
+            <Label Margin="0,0,20,0" Content="{Binding Employee.Division}" FontSize="48" FontWeight="Bold" Foreground="Blue" />
+            <Label Margin="0,0,20,0" Content="{Binding Employee.Name}" FontSize="48" FontWeight="Bold" Foreground="Blue" />
             <Button Margin="0,0,20,0" HorizontalAlignment="Left" VerticalAlignment="Center" Command="{Binding SaveWinnerCommand}" Content="儲存" />
-            <Label VerticalAlignment="Center" Content="{Binding SaveWinnerMessage}" />
+            <Label VerticalAlignment="Center" Content="{Binding SaveWinnerMessage}" Foreground="Red" />
         </StackPanel>
         <DataGrid Grid.Row="5" Grid.ColumnSpan="2" Margin="5" AutoGenerateColumns="False" CanUserAddRows="False"
                   FontSize="24" IsReadOnly="True" ItemsSource="{Binding Prize.Winners}">

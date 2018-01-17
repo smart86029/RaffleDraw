@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 using MahApps.Metro;
+using MahApps.Metro.Controls.Dialogs;
 using RaffleDraw.Common;
 
 namespace RaffleDraw.Wpf
@@ -34,6 +35,7 @@ namespace RaffleDraw.Wpf
 
         private void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
         {
+            MessageBox.Show(e.Exception.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             LogUtility.Error(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), e.Exception);
             e.Handled = true;
         }
