@@ -192,8 +192,11 @@ namespace RaffleDraw.Wpf.ViewModels
             var fileName = string.Empty;
 
             MessengerInstance.Send(new NotificationMessageAction<string>("ExportWinner", x => fileName = x));
-            if (!string.IsNullOrWhiteSpace(fileName))
-                SaveWinningExcel(fileName);
+            if (string.IsNullOrWhiteSpace(fileName))
+                return;
+
+            SaveWinningExcel(fileName);
+            MessengerInstance.Send(new NotificationMessage("ExportWinnerCompleted"));
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
 using Microsoft.Win32;
@@ -23,8 +24,16 @@ namespace RaffleDraw.Wpf.Views
 
         private async void NotificationMessageReceivedAsync(NotificationMessage message)
         {
-            if (message.Notification == "ShowCreatePrizeDialog")
-                await dialogCoordinator.ShowMetroDialogAsync(DataContext, dialog);
+            switch (message.Notification)
+            {
+                case "ShowCreatePrizeDialog":
+                    await dialogCoordinator.ShowMetroDialogAsync(DataContext, dialog);
+                    break;
+
+                case "ExportPrizeCompleted":
+                    await dialogCoordinator.ShowMessageAsync(DataContext, "成功", "匯出完成");
+                    break;
+            }
         }
 
         private void NotificationMessageActionReceived<T>(NotificationMessageAction<T> message)
@@ -40,6 +49,19 @@ namespace RaffleDraw.Wpf.Views
                     var result = openFileDialog.ShowDialog();
                     if (result.GetValueOrDefault())
                         message.Execute(openFileDialog.FileName);
+                    break;
+
+                case "ExportPrize":
+                    var fileName = $"獎項清單{DateTime.Now.ToString("MMdd HH:mm:dd")}.xlsx";
+                    var saveFileDialog = new SaveFileDialog
+                    {
+                        FileName = fileName,
+                        DefaultExt = Constant.ExcelDefaultExtension,
+                        Filter = Constant.ExcelFileFilter
+                    };
+                    result = saveFileDialog.ShowDialog();
+                    if (result.GetValueOrDefault())
+                        message.Execute(saveFileDialog.FileName);
                     break;
             }
         }

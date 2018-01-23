@@ -69,7 +69,18 @@ namespace RaffleDraw.Data
         /// <param name="fileName">文件名稱。</param>
         public void SaveExcel(string fileName)
         {
-            throw new NotImplementedException();
+            var dataTables = new List<DataTable>();
+            var dataTable = new DataTable("獎項清單");
+            dataTable.Columns.Add("序號", typeof(string));
+            dataTable.Columns.Add("數量", typeof(string));
+            dataTable.Columns.Add("獎項內容", typeof(string));          
+            dataTable.Columns.Add("提供者", typeof(string));
+
+            foreach (var prize in prizes)
+                dataTable.Rows.Add(new object[] { prize.SerialNumber, prize.Quentity, prize.Content, prize.Provider });
+
+            dataTables.Add(dataTable);
+            ExcelUtility.Write(fileName, dataTables, 1);
         }
     }
 }

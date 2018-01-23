@@ -1,10 +1,10 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Input;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using RaffleDraw.Data;
 using RaffleDraw.Models;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace RaffleDraw.Wpf.ViewModels
 {
@@ -20,25 +20,27 @@ namespace RaffleDraw.Wpf.ViewModels
         /// </summary>
         public PrizeViewModel()
         {
-            ShowCreatePrizeDialogCommand = new RelayCommand(() => ShowCreatePrizeDialog());
-            ImportPrizeCommand = new RelayCommand(() => ImportPrize());
-            DeletePrizeCommand = new RelayCommand<Prize>(p => DeletePrize(p));
         }
 
         /// <summary>
-        /// 取得或設定顯示新增員工方塊命令。
+        /// 取得顯示新增員工方塊命令。
         /// </summary>
-        public ICommand ShowCreatePrizeDialogCommand { get; private set; }
+        public ICommand ShowCreatePrizeDialogCommand => new RelayCommand(() => ShowCreatePrizeDialog());
 
         /// <summary>
-        /// 取得或設定匯入獎項命令。
+        /// 取得匯入獎項命令。
         /// </summary>
-        public ICommand ImportPrizeCommand { get; private set; }
+        public ICommand ImportPrizeCommand => new RelayCommand(() => ImportPrize());
 
         /// <summary>
-        /// 取得或設定刪除獎項命令。
+        /// 取得匯出中獎者命令。
         /// </summary>
-        public ICommand DeletePrizeCommand { get; private set; }
+        public ICommand ExportPrizeCommand => new RelayCommand(() => ExportPrize());
+
+        /// <summary>
+        /// 取得刪除獎項命令。
+        /// </summary>
+        public ICommand DeletePrizeCommand => new RelayCommand<Prize>(p => DeletePrize(p));
 
         /// <summary>
         /// 取得獎項清單。
@@ -63,6 +65,21 @@ namespace RaffleDraw.Wpf.ViewModels
             MessengerInstance.Send(new NotificationMessageAction<string>("ImportPrize", x => fileName = x));
             if (!string.IsNullOrWhiteSpace(fileName))
                 prizeRepository.LoadExcel(fileName);
+        }
+
+        /// <summary>
+        /// 匯出獎項。
+        /// </summary>
+        private void ExportPrize()
+        {
+            var fileName = string.Empty;
+
+            MessengerInstance.Send(new NotificationMessageAction<string>("ExportPrize", x => fileName = x));
+            if (string.IsNullOrWhiteSpace(fileName))
+                return;
+
+            prizeRepository.SaveExcel(fileName);
+            MessengerInstance.Send(new NotificationMessage("ExportPrizeCompleted"));
         }
 
         /// <summary>

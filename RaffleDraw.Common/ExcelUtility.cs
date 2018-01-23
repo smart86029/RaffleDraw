@@ -65,17 +65,28 @@ namespace RaffleDraw.Common
         /// <param name="dataTables">資料表。</param>
         public static void Write(string fileName, List<DataTable> dataTables)
         {
+            Write(fileName, dataTables, 0);
+        }
+
+        /// <summary>
+        /// 寫入 Excel。
+        /// </summary>
+        /// <param name="fileName">檔案名稱。</param>
+        /// <param name="dataTables">資料表。</param>
+        /// <param name="headerRowIndex">表頭索引。</param>
+        public static void Write(string fileName, List<DataTable> dataTables, int headerRowIndex)
+        {
             var workbook = new XSSFWorkbook();
 
             foreach (var dataTable in dataTables)
             {
                 var sheet = string.IsNullOrWhiteSpace(dataTable.TableName) ? workbook.CreateSheet() : workbook.CreateSheet(dataTable.TableName);
-                var headerRow = sheet.CreateRow(0);
+                var headerRow = sheet.CreateRow(headerRowIndex);
 
                 foreach (DataColumn column in dataTable.Columns)
                     headerRow.CreateCell(column.Ordinal).SetCellValue(column.ColumnName);
 
-                var rowIndex = 1;
+                var rowIndex = headerRowIndex + 1;
                 foreach (DataRow row in dataTable.Rows)
                 {
                     var dataRow = sheet.CreateRow(rowIndex) as XSSFRow;
