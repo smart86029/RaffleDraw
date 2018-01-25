@@ -26,5 +26,7 @@
                 <views:ResultView />
             </TabItem>
         </controls:MetroTabControl>
+        <Image Width="255" Height="382" Margin="0,0,5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+               Source="Images\telbaby.png" />
     </Grid>
 </controls:MetroWindow>

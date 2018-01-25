@@ -30,12 +30,7 @@ namespace RaffleDraw.Models
         public string EmployeeId
         {
             get => employeeId;
-            set
-            {
-                
-                Set(ref employeeId, value);
-            }
-                
+            set => Set(ref employeeId, value);
         }
 
         /// <summary>
@@ -80,5 +75,10 @@ namespace RaffleDraw.Models
             get => prize;
             set => Set(ref prize, value);
         }
+
+        /// <summary>
+        /// 取得或設定遮罩員工編號。
+        /// </summary>
+        public string MaskEmployeeId => $"{EmployeeId.Substring(0, 2)}XXX{EmployeeId.Substring(5, 1)}";
     }
 }

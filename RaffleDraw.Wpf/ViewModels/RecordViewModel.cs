@@ -27,6 +27,7 @@ namespace RaffleDraw.Wpf.ViewModels
         private string searchSerialNumber = string.Empty;
         private string saveWinnerMessage = string.Empty;
         private bool shouldExport;
+        private bool hasEmployee;
 
         /// <summary>
         /// 初始化紀錄檢視模型的執行個體。
@@ -112,6 +113,15 @@ namespace RaffleDraw.Wpf.ViewModels
         }
 
         /// <summary>
+        /// 取得或設定是否有員工。
+        /// </summary>
+        public bool HasEmployee
+        {
+            get => hasEmployee;
+            set => Set(ref hasEmployee, value);
+        }
+
+        /// <summary>
         /// 搜尋員工。
         /// </summary>
         private void SearchEmployee()
@@ -121,6 +131,7 @@ namespace RaffleDraw.Wpf.ViewModels
                 return;
 
             Employee = employee;
+            HasEmployee = true;
             SaveWinnerMessage = string.Empty;
             if (employee.Prize != null)
             {
@@ -160,6 +171,7 @@ namespace RaffleDraw.Wpf.ViewModels
             Employee.Prize = Prize;
             ShouldExport = true;
             Employee = null;
+            HasEmployee = false;
             SearchSerialNumber = string.Empty;
             SaveWinnerMessage = string.Empty;
             if (prize.Quentity <= prize.Winners.Count)

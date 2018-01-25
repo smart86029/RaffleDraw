@@ -52,7 +52,7 @@ namespace RaffleDraw.Wpf.Views
                     break;
 
                 case "ExportPrize":
-                    var fileName = $"獎項清單{DateTime.Now.ToString("MMdd HH:mm:dd")}.xlsx";
+                    var fileName = $"獎項清單{DateTime.Now.ToString("MMdd HH-mm-ss")}.xlsx";
                     var saveFileDialog = new SaveFileDialog
                     {
                         FileName = fileName,
